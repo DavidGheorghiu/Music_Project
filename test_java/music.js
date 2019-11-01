@@ -1,3 +1,0 @@
-DavidisBI =()=>{
-alert("TITSSSSSSS")
-}
