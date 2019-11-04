@@ -15,3 +15,14 @@ playSound = () => {
   }
   document.getElementById("demo").innerHTML;
 };
+
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioContext = new AudioContext();
+var osc = audioContext.createOscillator();
+osc.type = "triangle";
+osc.connect(audioContext.destination);
+
+function playSound(freq) {
+  osc.frequency.value = freq;
+  osc.start(0);
+}
