@@ -1,4 +1,4 @@
-playSound1 = () => {
+playSound1 = freq => {
   var cMajor = {
     c: 261.6, // C
     d: 293.7, // D
@@ -13,7 +13,7 @@ playSound1 = () => {
   for (i in cMajor) {
     console.log(cMajor[i]);
   }
-  document.getElementById("demo").innerHTML;
+  // document.getElementById("demo").innerHTML;
 };
 
 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -21,7 +21,8 @@ const audioContext = new AudioContext();
 var osc = audioContext.createOscillator();
 osc.type = "triangle";
 osc.connect(audioContext.destination);
-
+osc.frequency.value = freq;
+osc.start(0);
 /*
 function playSound(freq) {
   osc.frequency.value = freq;
@@ -29,20 +30,9 @@ function playSound(freq) {
 }
 */
 
-var bufferSize = 4096;
-var effect = (function() {
-  var lastOut = 0.0;
-  var node = audioContext.createScriptProcessor(bufferSize, 1, 1);
-  node.onaudioprocess = function(e) {
-    var input = e.inputBuffer.getChannelData(0);
-    var output = e.outputBuffer.getChannelData(0);
-    for (var i = 0; i < bufferSize; i++) {
-      output[i] = (input[i] + lastOut) / 2.0;
-      lastOut = output[i];
-    }
-  };
-  return node;
-})();
 // osc.start(0);
 
 ///need to make filters to manipulate sound frequencies
+var synth = new Tone.Synth().toMaster();
+synth.triggerAttackRelease("C4", "8n");
+document.getElementById("demo").addEventListener("click", () => Tone.start());
