@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title></title>
-        <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
-    </head>
-    <body>
-        <button id="play-button" onclick="play()">Play</button>
-        <button id="stop-button" onclick="stop()">Stop</button>
-        <button id="loop-button" onclick="loop()">Loop</button>
-        <script src="./static/scripts.js"></script>
-    </body>
+  <head>
+    <title>Sequencer</title>
+
+    <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+    <script src="./static/scripts.js"></script>
+    
+  </head>
+
+  <body>
+    <button id="play-button" onclick="play()">Play</button>
+    <button id="stop-button" onclick="stop()">Stop</button>
+    <button id="loop-button" onclick="loop()">Loop</button>
+
+    <div style="margin-left:1300px" id="filter">
+      <p><strong style="font-size:larger;">Audio Filters</strong></p>
+        <span>Type of Wave</span>
+        </span>
+
+      <select id="selectedVal" onclick="selectedWave()">
+        <button value="" selected disabled hidden>Type of wave</option>
+        <option  id="sine" value="sine">Sine</option>
+        <option   id="square" value="square">Square</option>
+        <option id ="triangle" value="triangle">Triangle</option>
+        <option  id="sawtooth" value="sawtooth">Sawtooth</option>
+      </select>
+      <br>
+      <label>Frequency</label>
+      <input onclick="selectedFreq()" id="freq" value=""></input>
+      <br>
+
+      <label>Reverb</label>
+      <div class="reverb">
+        <input type="range" min="1" max="100" value="20" class="slider" id="initalValue">
+        <p>Value: <span id="demo">3</span></p>
+      </div>
+
+      <div class="volumeGain">
+            <label>Volume</label>
+        <input type="range" min="0" max="100" value="20" class="slider" id="initalValue">
+        <p>Volume: <span id="volume">1</span></p>
+      </div>
+    </div>
+    
+  </body>
 </html>
