@@ -2,16 +2,18 @@
 <html>
   <head>
     <title>Sequencer</title>
-
+   
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
     <script src="./static/scripts.js"></script>
     
   </head>
 
   <body>
-    <button id="play-button" onclick="play()">Play</button>
-    <button id="stop-button" onclick="stop()">Stop</button>
-    <button id="loop-button" onclick="loop()">Loop</button>
+     <button style="font-size:24px" id="play-button" onclick="play()"><i class="fa fa-play"></i></button>
+     <button style="font-size:24px" id="stop-button" onclick="stop()"> <i class="fa fa-stop"></i></button>
+     <button id="loop-button" onclick="loop()">Loop</button>
 
     <div style="margin-left:1300px" id="filter">
       <p><strong style="font-size:larger;">Audio Filters</strong></p>
@@ -27,19 +29,19 @@
       </select>
       <br>
       <label>Frequency</label>
-      <input onclick="selectedFreq()" id="freq" value=""></input>
+      <input onchange="selectedFreq()" id="freq" value=""></input>
       <br>
 
       <label>Reverb</label>
       <div class="reverb">
-        <input type="range" min="1" max="100" value="20" class="slider" id="initalValue">
-        <p>Value: <span id="demo">3</span></p>
+        <input type="range" min="0" max="10" value="0"  id="initalValue" onmousemove="Reverb(this.value)">
+        <p>Value: <span id="reverb"></span></p>
       </div>
 
       <div class="volumeGain">
             <label>Volume</label>
-        <input type="range" min="0" max="100" value="20" class="slider" id="initalValue">
-        <p>Volume: <span id="volume">1</span></p>
+        <input type="range" min="0"  max="100" value="0" id="initalValue2" onmousemove="volumeGain(this.value)">
+        <p>Volume: <span  id="volume"></span></p>
       </div>
     </div>
     

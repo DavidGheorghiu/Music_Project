@@ -1,13 +1,13 @@
-const express = require('express')
+const express = require("express");
 const app = express();
-const path = require('path');
+const path = require("path");
 
-app.use("/static", express.static('./static/'));
+app.use("/static", express.static("./static/"));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/home.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + "/home.html"));
 });
 
 app.listen(8000, () => {
-  console.log('Server Running...');
+  console.log("Server Running...");
 });
