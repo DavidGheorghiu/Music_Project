@@ -1,15 +1,17 @@
 function play() {
-  var value = this.value;
+  var volumeSlider = document.getElementById("volumeValue").value;
+
   var waveType = selectedWave();
   var freq = selectedFreq();
-  var Volume = volumeGain(value);
+  //var Volume = volumeGain(value);
 
   console.log(waveType);
   console.log(freq);
-  console.log(Volume);
+  console.log(volumeSlider);
   var synth = new Tone.Synth({
     frequency: freq,
     detune: 0,
+    volume: volumeSlider,
     //  decay: 0,
     // preDelay: 0.01,
     oscillator: {
@@ -18,10 +20,10 @@ function play() {
   }).toMaster();
 
   synth.triggerAttackRelease(freq, "8n");
-  var synth = new Tone.Reverb({
-    decay: 9.5,
-    preDelay: 0.1
-  }).toMaster();
+  //var synth = new Tone.Reverb({
+  // decay: 9.5,
+  //preDelay: 0.1
+  ///}).toMaster();
   // volume: Volume,
   //mute: false
   //}).toMaster();

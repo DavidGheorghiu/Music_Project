@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
   <head>
     <title>Sequencer</title>
@@ -13,7 +13,6 @@
   <body>
      <button style="font-size:24px" id="play-button" onclick="play()"><i class="fa fa-play"></i></button>
      <button style="font-size:24px" id="stop-button" onclick="stop()"> <i class="fa fa-stop"></i></button>
-     <button id="loop-button" onclick="loop()">Loop</button>
 
     <div style="margin-left:1300px" id="filter">
       <p><strong style="font-size:larger;">Audio Filters</strong></p>
@@ -34,13 +33,13 @@
 
       <label>Reverb</label>
       <div class="reverb">
-        <input type="range" min="0" max="10" value="0"  id="initalValue" onmousemove="Reverb(this.value)">
+        <input type="range" min="0" max="10" value="0"  id="reverbValue" onmousemove="Reverb(this.value)">
         <p>Value: <span id="reverb"></span></p>
       </div>
 
       <div class="volumeGain">    
         <i style="font-size:24px" class="fa">&#xf028;</i>
-        <input type="range" min="0"  max="100" value="0" id="initalValue2" onmousemove="volumeGain(this.value)">
+        <input type="range" min="0"  max="100" value="0" id="volumeValue" onmousemove="volumeGain(this.value)">
         <p>Volume: <span  id="volume"></span></p>
       </div>
     </div>
