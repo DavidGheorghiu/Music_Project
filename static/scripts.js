@@ -33,10 +33,10 @@ sequencer.addEventListener('click', function(event) {
 
 function play() {
     // Get columns and convert the htmlcollection to an array so we have access to the index values
-    var columns = Array.prototype.slice.call(document.querySelectorAll('.column'));
+    var columns = Array.from(document.querySelectorAll('.column'));
     for(let column of columns) {
         // Get cells from the currently looped column and convert the htmlcollection to an array so we have access to the index values
-        var cells = Array.prototype.slice.call(column.children);
+        var cells = Array.from(column.children);
         for(let cell of cells) {
             if(cell.classList.contains('selected')) {
                 // Do stuff here...
