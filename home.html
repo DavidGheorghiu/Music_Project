@@ -15,7 +15,7 @@
      <button style="font-size:24px" id="stop-button" onclick="stop()"> <i class="fa fa-stop"></i></button>
      <button id="loop-button" onclick="loop()">Loop</button>
 
-    <div style="margin-left:1300px" id="filter">
+    <div style="text-align:right;, margin: 1000px;" id="filter">
       <p><strong style="font-size:larger;">Audio Filters</strong></p>
         <span>Type of Wave</span>
         </span>
@@ -28,8 +28,8 @@
         <option  id="sawtooth" value="sawtooth">Sawtooth</option>
       </select>
       <br>
-      <label>Frequency</label>
-      <input onchange="selectedFreq()" id="freq" value=""></input>
+      <label>Sample Rate</label>
+      <input onchange="selectedSamRate()" id="SamRate" value=""></input>
       <br>
 
       <label>Reverb</label>
@@ -38,12 +38,17 @@
         <p>Value: <span id="reverb"></span></p>
       </div>
 
-      <div class="volumeGain">    
-        <i style="font-size:24px" class="fa">&#xf028;</i>
+      <div id ="master-vol" class="ui-slider">
+        <div class="ui-slider-range" style="width"></div>
+        <p> <i style="font-size:24px;" class="fa">&#xf028; </i> Volume: <span  id="volume">  </span></p>
         <input type="range" min="0"  max="100" value="0" id="initalValue2" onmousemove="volumeGain(this.value)">
-        <p>Volume: <span  id="volume"></span></p>
+      </div>
+
+        <!-- <span> class="ui-slider" tabindex="0" style="left: 30%"</span>
+        
       </div>
     </div>
+    -->
     
   </body>
 </html>

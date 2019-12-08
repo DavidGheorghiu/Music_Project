@@ -1,14 +1,14 @@
 function play() {
   var value = this.value;
   var waveType = selectedWave();
-  var freq = selectedFreq();
+  var SamRate = selectedSamRate();
   var Volume = volumeGain(value);
 
   console.log(waveType);
-  console.log(freq);
+  console.log(SamRate);
   console.log(Volume);
   var synth = new Tone.Synth({
-    frequency: freq,
+    SampleRate: SamRate,
     detune: 0,
     //  decay: 0,
     // preDelay: 0.01,
@@ -17,7 +17,7 @@ function play() {
     }
   }).toMaster();
 
-  synth.triggerAttackRelease(freq, "8n");
+  synth.triggerAttackRelease(SamRate, "8n");
   var synth = new Tone.Reverb({
     decay: 9.5,
     preDelay: 0.1
@@ -30,14 +30,14 @@ function play() {
 
 function loop() {
   var waveType = selectedWave();
-  var freq = selectedFreq();
+  var SamRate = selectedSamRate();
   var synth = new Tone.Synth({
     oscillator: {
       type: waveType
     }
   }).toMaster();
   var loop = new Tone.Loop(function(time) {
-    synth.triggerAttackRelease(freq, "8n", time);
+    synth.triggerAttackRelease(SamRate, "8n", time);
   }, "1n");
 
   loop.start("1m").stop("4m");
@@ -53,10 +53,10 @@ function selectedWave() {
   console.log(val);
   return val;
 }
-function selectedFreq() {
-  var frequency = document.getElementById("freq").value; //selected value of frequency
-  console.log(frequency);
-  return frequency;
+function selectedSamRate() {
+  var SampleRate = document.getElementById("SamRate").value; //selected value of frequency
+  console.log(SampleRate);
+  return SampleRate;
 }
 /*
 var slider = document.getElementById("intialValue");
