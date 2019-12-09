@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Sequencer</title>
         <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+        <link href="./static/css/styles.css">
     </head>
     <style>
         .sequencer {
             border: 1px solid black;
             height: 500px;
-            width: 500px;    
+            width: 600px;    
         }
 
         .column {
@@ -28,8 +29,7 @@
     <body>
         <button id="play-button" onclick="play()">Play</button>
         <button id="stop-button" onclick="stop()">Stop</button>
-        <button id="loop-button" onclick="loop()">Loop</button>
-        
+
         <div class="sequencer">
             <div class="column">
                 <div class="cell"></div>
@@ -111,8 +111,7 @@
                 <div class="cell"></div>
                 <div class="cell"></div>
             </div>
-        </div>
         
-        <script src="./static/scripts.js"></script>
+        <script src="./static/javascript/scripts.js"></script>
     </body>
 </html>
