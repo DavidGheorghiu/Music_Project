@@ -27,10 +27,13 @@
         }
     </style>
     <body>
-        <button id="play-button" onclick="play()">Play</button>
+        <button onclick="play()">Play</button>
         <button id="stop-button" onclick="stop()">Stop</button>
 
-        <div class="sequencer">
+        <div class="bpm-slider">
+            <input type="range" min="60" max="200" value="60" class="slider" id="sample-bpm-slider" onchange="updateBpm(this)">
+        </div>
+        <div id="sample-sequencer" class="sequencer">
             <div class="column">
                 <div class="cell"></div>
                 <div class="cell"></div>
