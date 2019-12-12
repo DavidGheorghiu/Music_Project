@@ -40,23 +40,9 @@ function play() {
     function(time, columnIndex) {
       // Get column the current column
       var column = document.querySelectorAll(".column")[columnIndex];
-      var synth = new Tone.Synth({
-        frequency: freq,
-        detune: 0,
-        volume: volumeSlider,
-        // decay: 0,
-        // preDelay: 0.01,
-        oscillator: {
-          type: waveType
-        }
-      }).toMaster();
 
-      new Tone.Reverb({
-        decay: reverbSlider,
-        preDelay: 0.01
-      }).toMaster();
       //synth2.triggerAttackRelease(freq, "8n");
-      synth.triggerAttackRelease(freq, "8n");
+      // synth.triggerAttackRelease(freq, "8n");
       // Get cells from the currently looped column and convert the htmlcollection to an array so we have access to the index values
       var cells = Array.from(column.children);
       for (let cell of cells) {
