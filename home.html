@@ -7,9 +7,8 @@
     </head>
     <style>
         .sequencer {
-            border: 1px solid black;
-            height: 500px;
-            width: 600px;    
+            display: inline-block;
+            border: 1px solid black;    
         }
 
         .column {
@@ -30,19 +29,95 @@
         <button onclick="play()">Play</button>
         <button id="stop-button" onclick="stop()">Stop</button>
 
-        <div class="bpm-slider">
-            <input type="range" min="60" max="200" value="60" class="slider" id="sample-bpm-slider" onchange="updateBpm(this)">
+        <div id="oscillator-sequencer" class="sequencer">
+            <div class="bpm-slider">
+                <input type="range" min="60" max="200" value="60" class="slider" id="oscillator-bpm-slider" onchange="updateBpm(this)">
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
         </div>
+
         <div id="sample-sequencer" class="sequencer">
-            <div class="column">
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
+            <div class="bpm-slider">
+                <input type="range" min="60" max="200" value="60" class="slider" id="sample-bpm-slider" onchange="updateBpm(this)">
             </div>
             <div class="column">
                 <div class="cell"></div>
@@ -114,6 +189,17 @@
                 <div class="cell"></div>
                 <div class="cell"></div>
             </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+        </div>
         
         <script src="./static/javascript/scripts.js"></script>
     </body>

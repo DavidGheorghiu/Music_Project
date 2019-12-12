@@ -1,4 +1,5 @@
 function play() {
+    oscillatorSequence.start();
     sampleSequence.start();
     Tone.Transport.start();
 }
@@ -14,22 +15,47 @@ function updateBpm(slider) {
     }
 }
 
-var sequencer = document.querySelector('.sequencer');
-sequencer.addEventListener('click', function(event) {
-    eventTarget = event.target;
-    if(eventTarget.className.includes('cell')) {
-        classlist = eventTarget.classList;
-        if(!classlist.contains('selected')) {
-            classlist.add('selected');
+var sequencers = document.querySelectorAll('.sequencer');
+for(sequencer of sequencers) {
+    sequencer.addEventListener('click', function(event) {
+        eventTarget = event.target;
+        if(eventTarget.className.includes('cell')) {
+            classlist = eventTarget.classList;
+            if(!classlist.contains('selected')) {
+                classlist.add('selected');
+            }
+            else {
+                classlist.remove('selected');
+            }
         }
-        else {
-            classlist.remove('selected');
+    });
+}
+
+// Oscillator Sequencer
+{
+    // TODO: Need to create oscillator tone
+    //var synth = 
+
+    // Loop through the sequencer and play any sounds that were selected to play
+    let columns = document.getElementById('oscillator-sequencer').children;
+    var oscillatorSequence = new Tone.Sequence(function(time, columnIndex) {
+        // Get the current column
+        var column = columns[columnIndex];
+        // Get cells from the currently looped column and convert the htmlcollection to an array so we have access to the index values
+        var cells = Array.from(column.children);
+        for(let cell of cells) {
+            if(cell.classList.contains('selected')) {
+                // Use the cell index to get the correct sound for that cell
+                sampleSound = players._players[cells.indexOf(cell)];
+                sampleSound.start(time, 0, '32n', 0.5);
+            }
         }
-    }
-});
+    }, [0, 1, 2, 3, 4, 5, 6, 7], '16n');
+}
 
 // Sample Sequencer
 {
+    // Store the .wav files in a Tone player to be used in the Sequence
     var players = new Tone.Players([
         './static/Samples/909 Drum Machine/909YCLAP/909Y38SN11.wav',
         './static/Samples/909 Drum Machine/909YCRASHS/909Y49CS11.wav',
@@ -44,7 +70,8 @@ sequencer.addEventListener('click', function(event) {
         'fadeOut': '64n',
     }).toMaster();
     
-    var columns = document.getElementById('sample-sequencer').children;
+    // Loop through the sequencer and play any sounds that were selected to play
+    let columns = document.getElementById('sample-sequencer').children;
     var sampleSequence = new Tone.Sequence(function(time, columnIndex) {
         // Get the current column
         var column = columns[columnIndex];
