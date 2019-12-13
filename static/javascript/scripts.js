@@ -68,27 +68,32 @@ for (sequencer of sequencers) {
         frequency: freq,
 
         detune: 0,
-        volume: volumeSlider,
-        envelop: {
-          decay: reverbSlider,
-          preDelay: 0.01,
-          sustain: 0.3,
-          release: 1
-        },
+        //  volume: volumeSlider,
+        // envelop: {
+        //  decay: reverbSlider,
+        // preDelay: 0.01,
+        //sustain: 0.3,
+        //release: 1
+        //},
 
         oscillator: {
           type: waveType
         }
-      }).toMaster();
-      // var synth2 = new Tone.Reverb({ decay: reverbSlider }).connect();
-      //var synth3 = new Tone.Volume({ volume: volumeSlider }).connect();
+      });
+      var synth2 = new Tone.Reverb({ decay: reverbSlider }).toMaster();
+      synth.connect(synth2);
+
+      var synth3 = new Tone.Volume({ volume: volumeSlider }).toMaster();
+      synth.connect(synth3);
+      var synth4 = new Tone.Frequency(freq);
+      synth.connect(synth4);
       for (let cell of cells) {
         if (cell.classList.contains("selected")) {
           // Use the cell index to get the correct sound for that cell
           sampleSound = players._players[cells.indexOf(cell)];
           sampleSound.start(time, 0, "32n", 0.5);
           synth.triggerAttackRelease(cMajor[columnIndex], "32n");
-          //synth.triggerAttackRelease(freq, "32n");
+          //  synth.triggerAttackRelease(freq, "32n");
         }
       }
     },
