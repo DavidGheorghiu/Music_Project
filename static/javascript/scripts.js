@@ -16,33 +16,33 @@ sequencer.addEventListener("click", function(event) {
 });
 
 var players = new Tone.Players(
-  {
-    volume: 0,
-    fadeOut: "64n"
-  }[
-    ("./static/Samples/909 Drum Machine/909YCLAP/909Y38SN11.wav",
+  [
+    "./static/Samples/909 Drum Machine/909YCLAP/909Y38SN11.wav",
     "./static/Samples/909 Drum Machine/909YCRASHS/909Y49CS11.wav",
     "./static/Samples/909 Drum Machine/909YHHTS/909Y42CHH1.wav",
     "./static/Samples/909 Drum Machine/909YKICK/909Y33BD31.wav",
     "./static/Samples/909 Drum Machine/909YRIDE/909Y51RD11.wav",
     "./static/Samples/909 Drum Machine/909YRIM/909Y37RIM1.wav",
     "./static/Samples/909 Drum Machine/909YSNARES/909Y38SN11.wav",
-    "./static/Samples/909 Drum Machine/909YTOMS/909Y41FTL1.wav")
-  ]
+    "./static/Samples/909 Drum Machine/909YTOMS/909Y41FTL1.wav"
+  ],
+  {
+    volume: -12,
+    fadeOut: "64n"
+  }
 ).toMaster();
 
+var reverbSlider = document.getElementById("reverbValue").value;
+var volumeSlider = document.getElementById("volumeValue").value;
+var waveType = selectedWave();
+var freq = selectedFreq();
+
 function play() {
-  var reverbSlider = document.getElementById("reverbValue").value;
-  var volumeSlider = document.getElementById("volumeValue").value;
-  var waveType = selectedWave();
-  var freq = selectedFreq();
   var loop = new Tone.Sequence(
     function(time, columnIndex) {
+      console.log(columnIndex);
       // Get column the current column
       var column = document.querySelectorAll(".column")[columnIndex];
-
-      //synth2.triggerAttackRelease(freq, "8n");
-      // synth.triggerAttackRelease(freq, "8n");
       // Get cells from the currently looped column and convert the htmlcollection to an array so we have access to the index values
       var cells = Array.from(column.children);
       for (let cell of cells) {
@@ -56,7 +56,6 @@ function play() {
     [0, 1, 2, 3, 4, 5, 6, 7],
     "16n"
   ).start(0);
-
   Tone.Transport.start();
 }
 
