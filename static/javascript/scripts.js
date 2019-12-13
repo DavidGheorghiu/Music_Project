@@ -50,26 +50,6 @@ for (sequencer of sequencers) {
 // Oscillator Sequencer
 {
   var cMajor = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
-  var volumeSlider = document.getElementById("volumeValue").value;
-  // Tone.Transport.volume.value = volumeSlider.value;
-  var waveType = selectedWave();
-  var freq = selectedFreq();
-  var synth = new Tone.Synth({
-    frequency: freq,
-    detune: 0,
-    // volume: volumeSlider,
-    envelop: {
-      decay: 0,
-      preDelay: 0.01,
-      sustain: 0.3,
-      release: 1
-    },
-
-    oscillator: {
-      type: waveType
-    }
-  }).toMaster();
-  //  synth.triggerAttackRelease(freq, "32n");
   // Loop through the sequencer and play any sounds that were selected to play
   let columns = document.getElementById("oscillator-sequencer").children;
   var oscillatorSequence = new Tone.Sequence(
@@ -78,13 +58,37 @@ for (sequencer of sequencers) {
       var column = columns[columnIndex];
       // Get cells from the currently looped column and convert the htmlcollection to an array so we have access to the index values
       var cells = Array.from(column.children);
+
+      var volumeSlider = document.getElementById("volumeValue").value;
+      var reverbSlider = document.getElementById("reverbValue").value;
+
+      var waveType = selectedWave();
+      var freq = selectedFreq();
+      var synth = new Tone.Synth({
+        frequency: freq,
+
+        detune: 0,
+        // volume: volumeSlider,
+        envelop: {
+          decay: reverbSlider,
+          preDelay: 0.01,
+          sustain: 0.3,
+          release: 1
+        },
+
+        oscillator: {
+          type: waveType
+        }
+      }).toMaster();
+      var synth2 = new Tone.Reverb({ decay: reverbSlider }).connect();
+      var synth3 = new Tone.Volume({ volume: volumeSlider }).connect();
       for (let cell of cells) {
         if (cell.classList.contains("selected")) {
           // Use the cell index to get the correct sound for that cell
           sampleSound = players._players[cells.indexOf(cell)];
           sampleSound.start(time, 0, "32n", 0.5);
-          //  synth.triggerAttackRelease(cMajor[columnIndex], "32n");
-          synth.triggerAttackRelease(freq, "32n");
+          synth.triggerAttackRelease(cMajor[columnIndex], "32n");
+          //synth.triggerAttackRelease(freq, "32n");
         }
       }
     },
