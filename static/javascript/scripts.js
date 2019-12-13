@@ -8,11 +8,8 @@ function stop() {
     Tone.Transport.stop();
 }
 
-function updateBpm(slider) {
-    // add check for oscillator bpm slider
-    if(slider.id == 'sample-bpm-slider') {
-        Tone.Transport.bpm.value = slider.value;
-    }
+function updateBpm(bpmSlider) {
+    Tone.Transport.bpm.value = bpmSlider.value;
 }
 
 var sequencers = document.querySelectorAll('.sequencer');
@@ -33,8 +30,8 @@ for(sequencer of sequencers) {
 
 // Oscillator Sequencer
 {
-    // TODO: Need to create oscillator tone
-    //var synth = 
+    var cMajor = ['C4','D4','E4','F4','G4','A4','B4','C5'];
+    var synth = new Tone.Synth().toMaster();
 
     // Loop through the sequencer and play any sounds that were selected to play
     let columns = document.getElementById('oscillator-sequencer').children;
@@ -48,6 +45,7 @@ for(sequencer of sequencers) {
                 // Use the cell index to get the correct sound for that cell
                 sampleSound = players._players[cells.indexOf(cell)];
                 sampleSound.start(time, 0, '32n', 0.5);
+                synth.triggerAttackRelease(cMajor[columnIndex], '32n');
             }
         }
     }, [0, 1, 2, 3, 4, 5, 6, 7], '16n');
