@@ -68,7 +68,7 @@ for (sequencer of sequencers) {
         frequency: freq,
 
         detune: 0,
-        // volume: volumeSlider,
+        volume: volumeSlider,
         envelop: {
           decay: reverbSlider,
           preDelay: 0.01,
@@ -80,8 +80,8 @@ for (sequencer of sequencers) {
           type: waveType
         }
       }).toMaster();
-      var synth2 = new Tone.Reverb({ decay: reverbSlider }).connect();
-      var synth3 = new Tone.Volume({ volume: volumeSlider }).connect();
+      // var synth2 = new Tone.Reverb({ decay: reverbSlider }).connect();
+      //var synth3 = new Tone.Volume({ volume: volumeSlider }).connect();
       for (let cell of cells) {
         if (cell.classList.contains("selected")) {
           // Use the cell index to get the correct sound for that cell
