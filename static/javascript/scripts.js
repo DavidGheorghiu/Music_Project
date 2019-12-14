@@ -1,6 +1,6 @@
 function play() {
   oscillatorSequence.start();
-  //sampleSequence.start();
+  sampleSequence.start();
   Tone.Transport.start();
 }
 
@@ -44,7 +44,7 @@ function selectedFreqSampler() {
   return frequency;
 }
 function volumeGainSampler(value) {
-  var vol = (document.getElementById("volumeValueSampler").innerHTML = value);
+  var vol = (document.getElementById("volumeSampler").innerHTML = value);
   // Tone.Transport.volume.value = vol.value;
   return vol;
 }
@@ -195,11 +195,14 @@ for (sequencer of sequencers) {
 
       var synthFrequency = new Tone.Frequency(freq);
       synthSampler.connect(synthFrequency).toMaster();
+
       for (let cell of cells) {
         if (cell.classList.contains("selected")) {
           // Use the cell index to get the correct sound for that cell
           sampleSound = players._players[cells.indexOf(cell)];
           sampleSound.start(time, 0, "32n", 0.5);
+          //  synth.triggerAttackRelease(players[columnIndex], "32n");
+          // synthSampler.triggerAttackRelease(freq, "32");
         }
       }
     },
