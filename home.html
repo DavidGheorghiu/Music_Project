@@ -1,13 +1,282 @@
-<!DOCTYPE html>
+
 <html>
-    <head>
-        <title></title>
-        <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+
+  <head>
+   
+    <title>Sequencer</title>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+        
+        <link href="./static/css/styles.css">
     </head>
+    
+
+  <body>
+
+    <div style="margin-left:1300px" id="filter-oscillator">
+      <p><strong style="font-size:larger;">Audio Filters for Oscillator</strong></p>
+        <span>Type of Wave</span>
+        </span>
+
+      <select id="selectedVal" onclick="selectedWave()">
+        <button value="" selected disabled hidden>Type of wave</option>
+        <option  id="sine" value="sine">Sine</option>
+        <option   id="square" value="square">Square</option>
+        <option id ="triangle" value="triangle">Triangle</option>
+        <option  id="sawtooth" value="sawtooth">Sawtooth</option>
+      </select>
+      <br>
+      <label>Frequency</label>
+      <input onchange="selectedFreq()" id="freq" value=""></input>
+      <br>
+
+      <label>Reverb</label>
+      <div class="reverb">
+        <input type="range" min="0" max="3  " value="0"  id="reverbValue" onmousemove="Reverb(this.value)">
+        <p>Value: <span id="reverb"></span></p>
+      </div>
+
+      <div class="volumeGain">    
+        <i style="font-size:24px" class="fa">&#xf028;</i>
+        <input type="range" min="0"  max="100" value="0" id="volumeValue" onmousemove="volumeGain(this.value)">
+        <p>Volume: <span  id="volume"></span></p>
+      </div>
+    </div>
+
+<br>
+
+
+    <div style="margin-left:1300px" id="filter-sampler">
+        <p><strong style="font-size:larger;">Audio Filters for Sampler</strong></p>
+          <span>Type of Wave</span>
+          </span>
+  
+        <select id="selectedVal" onclick="selectedWave()">
+          <button value="" selected disabled hidden>Type of wave</option>
+          <option  id="sine" value="sine">Sine</option>
+          <option   id="square" value="square">Square</option>
+          <option id ="triangle" value="triangle">Triangle</option>
+          <option  id="sawtooth" value="sawtooth">Sawtooth</option>
+        </select>
+        <br>
+        <label>Frequency</label>
+        <input onchange="selectedFreq()" id="freq" value=""></input>
+        <br>
+  
+        <label>Reverb</label>
+        <div class="reverb">
+          <input type="range" min="0" max="3  " value="0"  id="reverbValue" onmousemove="Reverb(this.value)">
+          <p>Value: <span id="reverb"></span></p>
+        </div>
+  
+        <div class="volumeGain">    
+          <i style="font-size:24px" class="fa">&#xf028;</i>
+          <input type="range" min="0"  max="100" value="0" id="volumeValue" onmousemove="volumeGain(this.value)">
+          <p>Volume: <span  id="volume"></span></p>
+        </div>
+      </div>
+  
+       <style>
+        .sequencer {
+            display: inline-block;
+            border: 1px solid black;    
+        }
+
+        .column {
+            float: left;
+        }
+
+        .cell {
+            border: 1px solid black;
+            height: 30px;
+            width: 30px;
+        }
+
+        .selected {
+            background-color: red;
+        }
+    </style>
     <body>
-        <button id="play-button" onclick="play()">Play</button>
+        <button onclick="play()">Play</button>
         <button id="stop-button" onclick="stop()">Stop</button>
-        <button id="loop-button" onclick="loop()">Loop</button>
-        <script src="./static/scripts.js"></script>
+
+        <div class="bpm-slider">
+                <label>BPM</label>
+                <br>
+                <input type="range" min="60" max="200" value="60" class="slider" onchange="updateBpm(this)">
+            </div>
+        <div id="oscillator-sequencer" class="sequencer">
+            
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+        </div>
+        
+<br>
+<label>Sampler</label>
+<br>
+
+        <div id="sample-sequencer" class="sequencer">
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="column">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+        </div>
+        
+        <script src="./static/javascript/scripts.js"></script>
     </body>
 </html>
