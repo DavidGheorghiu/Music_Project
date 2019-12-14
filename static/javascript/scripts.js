@@ -11,7 +11,7 @@ function stop() {
 function updateBpm(bpmSlider) {
   Tone.Transport.bpm.value = bpmSlider.value;
 }
-
+///filter for oscillator
 function selectedWave() {
   var val = document.getElementById("selectedVal").value; //selected value of wave type
   console.log(val);
@@ -30,6 +30,27 @@ function volumeGain(value) {
 
 function Reverb(value) {
   document.getElementById("reverb").innerHTML = value;
+}
+
+//filters for Sampler
+function selectedWaveSampler() {
+  var val = document.getElementById("selectedValSampler").value; //selected value of wave type
+  console.log(val);
+  return val;
+}
+function selectedFreqSampler() {
+  var frequency = document.getElementById("freqSampler").value; //selected value of frequency
+  console.log(frequency);
+  return frequency;
+}
+function volumeGainSampler(value) {
+  var vol = (document.getElementById("volumeValueSampler").innerHTML = value);
+  // Tone.Transport.volume.value = vol.value;
+  return vol;
+}
+
+function ReverbSampler(value) {
+  document.getElementById("reverbSampler").innerHTML = value;
 }
 
 var sequencers = document.querySelectorAll(".sequencer");
@@ -136,6 +157,44 @@ for (sequencer of sequencers) {
       var column = columns[columnIndex];
       // Get cells from the currently looped column and convert the htmlcollection to an array so we have access to the index values
       var cells = Array.from(column.children);
+
+      var volumeSliderSampler = document.getElementById("volumeValueSampler")
+        .value;
+      var reverbSliderSampler = document.getElementById("reverbValueSampler")
+        .value;
+
+      var waveTypeSampler = selectedWave();
+      var freqSampler = selectedFreq();
+      var synthSampler = new Tone.Synth({
+        frequency: freqSampler,
+
+        detune: 0,
+        //  volume: volumeSlider,
+        // envelop: {
+        //  decay: reverbSlider,
+        // preDelay: 0.01,
+        //sustain: 0.3,
+        //release: 1
+        //},
+
+        oscillator: {
+          type: waveTypeSampler
+        }
+      });
+
+      var synthReverb = new Tone.Reverb({
+        decay: reverbSliderSampler,
+        preDelay: 0.01
+      }).toMaster();
+      synthSampler.connect(synthReverb).toMaster();
+
+      var synthVolume = new Tone.Volume({
+        volume: volumeSliderSampler
+      }).toMaster();
+      synthSampler.connect(synthVolume).toMaster();
+
+      var synthFrequency = new Tone.Frequency(freq);
+      synthSampler.connect(synthFrequency).toMaster();
       for (let cell of cells) {
         if (cell.classList.contains("selected")) {
           // Use the cell index to get the correct sound for that cell
