@@ -43,12 +43,19 @@ for(sequencer of sequencers) {
         for(let cell of cells) {
             if(cell.classList.contains('selected')) {
                 // Use the cell index to get the correct sound for that cell
-                sampleSound = players._players[cells.indexOf(cell)];
-                sampleSound.start(time, 0, '32n', 0.5);
-                synth.triggerAttackRelease(cMajor[columnIndex], '32n');
+                synth.triggerAttackRelease(cMajor[cells.indexOf(cell)], '32n');
             }
         }
     }, [0, 1, 2, 3, 4, 5, 6, 7], '16n');
+}
+
+// Effects
+{
+    // Reverb
+    var reverb = new Tone.Reverb({
+        decay: 1.5,
+        preDelay: 0.01
+    }).connect(oscillatorSequence);
 }
 
 // Sample Sequencer
