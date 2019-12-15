@@ -17,11 +17,13 @@ function selectedWave() {
   console.log(val);
   return val;
 }
+
 function selectedFreq() {
   var frequency = document.getElementById("freq").value; //selected value of frequency
   console.log(frequency);
   return frequency;
 }
+
 function volumeGain(value) {
   var vol = (document.getElementById("volume").innerHTML = value);
   // Tone.Transport.volume.value = vol.value;
@@ -38,11 +40,13 @@ function selectedWaveSampler() {
   console.log(val);
   return val;
 }
+/*
 function selectedFreqSampler() {
   var frequency = document.getElementById("freqSampler").value; //selected value of frequency
   console.log(frequency);
   return frequency;
 }
+*/
 function volumeGainSampler(value) {
   var vol = (document.getElementById("volumeSampler").innerHTML = value);
   // Tone.Transport.volume.value = vol.value;
@@ -85,22 +89,16 @@ for (sequencer of sequencers) {
 
       var waveType = selectedWave();
       var freq = selectedFreq();
+      console.log(volumeSlider);
+      console.log(reverbSlider);
       var synth = new Tone.Synth({
         frequency: freq,
 
         detune: 0,
-        //  volume: volumeSlider,
-        // envelop: {
-        //  decay: reverbSlider,
-        // preDelay: 0.01,
-        //sustain: 0.3,
-        //release: 1
-        //},
-
         oscillator: {
           type: waveType
         }
-      });
+      }).toMaster();
 
       var synth2 = new Tone.Reverb({
         decay: reverbSlider,
@@ -144,10 +142,11 @@ for (sequencer of sequencers) {
       "./static/Samples/909 Drum Machine/909YTOMS/909Y41FTL1.wav"
     ],
     {
-      volume: -10,
+      volume: volumeSliderSampler,
       fadeOut: "64n"
     }
   ).toMaster();
+  var volumeSliderSampler = document.getElementById("volumeValueSampler").value;
 
   // Loop through the sequencer and play any sounds that were selected to play
   let columns = document.getElementById("sample-sequencer").children;
@@ -162,21 +161,13 @@ for (sequencer of sequencers) {
         .value;
       var reverbSliderSampler = document.getElementById("reverbValueSampler")
         .value;
-
+      console.log("sampler volume " + volumeSliderSampler);
+      console.log("reverb sampler value " + reverbSliderSampler);
       var waveTypeSampler = selectedWave();
       var freqSampler = selectedFreq();
       var synthSampler = new Tone.Synth({
         frequency: freqSampler,
-
         detune: 0,
-        //  volume: volumeSlider,
-        // envelop: {
-        //  decay: reverbSlider,
-        // preDelay: 0.01,
-        //sustain: 0.3,
-        //release: 1
-        //},
-
         oscillator: {
           type: waveTypeSampler
         }
