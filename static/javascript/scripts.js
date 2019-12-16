@@ -14,47 +14,45 @@ function updateBpm(bpmSlider) {
 
 ///filter for oscillator
 function selectedWave() {
-  var val = document.getElementById("selectedVal").value; //selected value of wave type
-  synth.oscillator.type = val;
+  var waveType = document.getElementById("selectedVal").value; //selected value of wave type
+  synth.oscillator.type = waveType;
 }
 
-function selectedDistortion() {
-  var val = document.getElementById("distortion").value; //selected value of wave type
-  dist.distortion = val;
+function updateDistortion(distortionSlider) {
+  var distortionValue = distortionSlider.value/10;
+  if(distortionSlider.id == 'synth-distortion') {
+    synthDistortion.distortion = distortionValue;
+  } else {
+    samplerDistortion.distortion = distortionValue;
+  }
+  console.log(synthDistortion.distortion)
 }
 
-function selectedWet() {
-  var val = document.getElementById("wet").value; //selected value of wave type
-  dist.wet = val;
-}
-function selectedWave() {
-  var val = document.getElementById("selectedVal").value; //selected value of wave type
-  synth.oscillator.type = val;
-}
-
-function volumeGain(value) {
-  synthVolume.volume.value = value;
+function updatedWet(wetSlider) {
+  var wetValue = wetSlider.value/10;
+  if(wetSlider.id == 'synth-wet') {
+    synthDistortion.wet = wetValue;
+  } else {
+    samplerDistortion.wet = wetValue;
+  }
 }
 
-function Reverb(value) {
-  synthReverb.dampening.value = value;
+function updateVolume(volumeSlider) {
+  var volumeValue = volumeSlider.value;
+  if(volumeSlider.id == 'synth-volume') {
+    synthVolume.volume.value = volumeValue;
+  } else {
+    samplerVolume.volume.value = volumeValue;
+  }
 }
 
-function volumeGainSampler(value) {
-  var vol = (document.getElementById("volumeSampler").innerHTML = value);
-}
-
-function ReverbSampler(value) {
-  document.getElementById("reverbSampler").innerHTML = value;
-}
-function selectedDistortionSampler() {
-  var val = document.getElementById("distortionSampler").value; //selected value of wave type
-  distSampler.distortion = val;
-}
-
-function selectedWetSampler() {
-  var val = document.getElementById("wetSampler").value; //selected value of wave type
-  distSampler.wet = val;
+function updateReverb(reverbSlider) {
+  var reverbValue = reverbSlider.value;
+  if(reverbSlider.id == 'synth-reverb') {
+    synthReverb.dampening.value = reverbValue;
+  } else {
+    samplerReverb.dampening.value = reverbValue;
+  }
 }
 
 var sequencers = document.querySelectorAll(".sequencer");
@@ -79,28 +77,25 @@ for (sequencer of sequencers) {
     oscillator: {
       type: document.getElementById("selectedVal").value
     }
-  }).toMaster();
+  });
 
   // Effects
-  var volumeSlider = document.getElementById("volumeValue").value;
-  var reverbSlider = document.getElementById("reverbValue").value;
-  var distortionSlider = document.getElementById("distortion").value;
-  var wetSlider = document.getElementById("wet").value;
+  var volumeSlider = document.getElementById("synth-volume").value;
+  var reverbSlider = document.getElementById("synth-reverb").value;
+  var distortionSlider = document.getElementById("synth-distortion").value;
+  var wetSlider = document.getElementById("synth-wet").value;
 
-  var synthReverb = new Tone.Freeverb(reverbSlider).toMaster();
-  synth.connect(synthReverb);
+  var synthReverb = new Tone.Freeverb(reverbSlider);
 
   var synthVolume = new Tone.Volume({
     volume: volumeSlider,
     mute: false
   }).toMaster();
-  synth.connect(synthVolume);
 
-  var dist = new Tone.Distortion({
+  var synthDistortion = new Tone.Distortion({
     distortion: distortionSlider,
     wet: wetSlider
   }).toMaster();
-  synth.connect(dist);
 
   // Loop through the sequencer and play any sounds that were selected to play
   let cMajor = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
@@ -146,12 +141,12 @@ for (sequencer of sequencers) {
   ).toMaster();
 
   // Effects
-  var volumeSliderSampler = document.getElementById("volumeValueSampler").value;
-  var reverbSliderSampler = document.getElementById("reverbValueSampler").value;
+  var volumeSliderSampler = document.getElementById("sampler-volume").value;
+  var reverbSliderSampler = document.getElementById("sampler-reverb").value;
 
-  var distortionSliderSampler = document.getElementById("distortionSampler")
+  var distortionSliderSampler = document.getElementById("sampler-distortion")
     .value;
-  var wetSliderSampler = document.getElementById("wetSampler").value;
+  var wetSliderSampler = document.getElementById("sampler-wet").value;
 
   var samplerReverb = new Tone.Freeverb(reverbSliderSampler).toMaster();
   players.connect(samplerReverb);
