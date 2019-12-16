@@ -1,6 +1,6 @@
 function play() {
   oscillatorSequence.start();
-  //  sampleSequence.start();
+  sampleSequence.start();
   Tone.Transport.start();
 }
 
@@ -11,40 +11,23 @@ function stop() {
 function updateBpm(bpmSlider) {
   Tone.Transport.bpm.value = bpmSlider.value;
 }
+
 ///filter for oscillator
 function selectedWave() {
   var val = document.getElementById("selectedVal").value; //selected value of wave type
-  console.log(val);
-  return val;
+  synth.oscillator.type = val;
 }
 
 function volumeGain(value) {
-  var vol = (document.getElementById("volume").innerHTML = value);
-  // Tone.Transport.volume.value = vol.value;
-  return vol;
+  synthVolume.volume.value = value;
 }
 
 function Reverb(value) {
-  document.getElementById("reverb").innerHTML = value;
+  synthReverb.dampening.value = value;
 }
 
-//filters for Sampler
-function selectedWaveSampler() {
-  var val = document.getElementById("selectedValSampler").value; //selected value of wave type
-  console.log(val);
-  return val;
-}
-/*
-function selectedFreqSampler() {
-  var frequency = document.getElementById("freqSampler").value; //selected value of frequency
-  console.log(frequency);
-  return frequency;
-}
-*/
 function volumeGainSampler(value) {
-  var vol = (document.getElementById("volumeSampler").innerHTML = value);
-  // Tone.Transport.volume.value = vol.value;
-  return vol;
+  var vol = document.getElementById("volumeSampler").innerHTML = value;
 }
 
 function ReverbSampler(value) {
@@ -66,60 +49,53 @@ for (sequencer of sequencers) {
   });
 }
 
+
+
+
 // Oscillator Sequencer
 {
-  var cMajor = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
+
+  var synth = new Tone.Synth({
+    detune: 0,
+    oscillator: {
+      type: document.getElementById('selectedVal').value
+    }
+  }).toMaster();
+
+  // Effects
+  var volumeSlider = document.getElementById("volumeValue").value;
+  var reverbSlider = document.getElementById("reverbValue").value;
+
+  var synthReverb = new Tone.Freeverb(reverbSlider).toMaster();
+  synth.connect(synthReverb);
+
+  var synthVolume = new Tone.Volume({
+    volume: volumeSlider,
+    mute: false
+  }).toMaster();
+  synth.connect(synthVolume);
+
   // Loop through the sequencer and play any sounds that were selected to play
+  let cMajor = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
   let columns = document.getElementById("oscillator-sequencer").children;
-  var oscillatorSequence = new Tone.Sequence(
-    function(time, columnIndex) {
-      // Get the current column
-      var column = columns[columnIndex];
-      // Get cells from the currently looped column and convert the htmlcollection to an array so we have access to the index values
-      var cells = Array.from(column.children);
 
-      var volumeSlider = document.getElementById("volumeValue").value;
-      var reverbSlider = document.getElementById("reverbValue").value;
+  var oscillatorSequence = new Tone.Sequence( function(time, columnIndex) {
+    // Get the current column
+    var column = columns[columnIndex];
+    // Get cells from the currently looped column and convert the htmlcollection to an array so we have access to the index values
+    var cells = Array.from(column.children);
 
-      var waveType = selectedWave();
-
-      console.log(volumeSlider);
-      console.log(reverbSlider);
-      var synth = new Tone.Synth({
-        detune: 0,
-        oscillator: {
-          type: waveType
-        }
-      }).toMaster();
-
-      var synth2 = new Tone.Reverb({
-        decay: reverbSlider,
-        preDelay: 0.01
-      }).toMaster();
-      synth.connect(synth2).toMaster();
-
-      var synth3 = new Tone.Volume({
-        volume: volumeSlider,
-        mute: false
-      }).toMaster();
-      synth.connect(synth3).toMaster();
-
-      for (let cell of cells) {
-        if (cell.classList.contains("selected")) {
-          // Use the cell index to get the correct sound for that cell
-          // synth.triggerAttackRelease(cMajor[columnIndex], "32n");
-          synth.frequency.value = freq;
-          synth.triggerAttackRelease(cMajor[cells.indexOf(cell)], "32n");
-        }
+    for (let cell of cells) {
+      if (cell.classList.contains("selected")) {
+        synth.triggerAttackRelease(cMajor[cells.indexOf(cell)], "32n");
       }
-    },
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    "16n"
-  );
+    }
+  }, [0, 1, 2, 3, 4, 5, 6, 7], "16n");
 }
 
 // Sample Sequencer
 {
+
   // Store the .wav files in a Tone player to be used in the Sequence
   var players = new Tone.Players(
     [
@@ -138,7 +114,20 @@ for (sequencer of sequencers) {
       fadeOut: "64n"
     }
   ).toMaster();
+
+
+  // Effects
   var volumeSliderSampler = document.getElementById("volumeValueSampler").value;
+  var reverbSliderSampler = document.getElementById("reverbValueSampler").value;
+
+  var samplerReverb = new Tone.Freeverb(reverbSliderSampler).toMaster();
+  players.connect(samplerReverb);
+
+  var samplerVolume = new Tone.Volume({
+    volume: volumeSliderSampler,
+    mute: false
+  }).toMaster();
+  players.connect(samplerVolume);
 
   // Loop through the sequencer and play any sounds that were selected to play
   let columns = document.getElementById("sample-sequencer").children;
@@ -149,40 +138,11 @@ for (sequencer of sequencers) {
       // Get cells from the currently looped column and convert the htmlcollection to an array so we have access to the index values
       var cells = Array.from(column.children);
 
-      var volumeSliderSampler = document.getElementById("volumeValueSampler")
-        .value;
-      var reverbSliderSampler = document.getElementById("reverbValueSampler")
-        .value;
-      console.log("sampler volume " + volumeSliderSampler);
-      console.log("reverb sampler value " + reverbSliderSampler);
-      var waveTypeSampler = selectedWave();
-
-      var synthSampler = new Tone.Synth({
-        detune: 0,
-        oscillator: {
-          type: waveTypeSampler
-        }
-      });
-
-      var synthReverb = new Tone.Reverb({
-        decay: reverbSliderSampler,
-        preDelay: 0.01
-      }).toMaster();
-      synthSampler.connect(synthReverb).toMaster();
-
-      var synthVolume = new Tone.Volume({
-        volume: volumeSliderSampler,
-        mute: false
-      }).toMaster();
-      synthSampler.connect(synthVolume).toMaster();
-
       for (let cell of cells) {
         if (cell.classList.contains("selected")) {
           // Use the cell index to get the correct sound for that cell
           sampleSound = players._players[cells.indexOf(cell)];
           sampleSound.start(time, 0, "32n", 0.5);
-          //  synth.triggerAttackRelease(players[columnIndex], "32n");
-          // synthSampler.triggerAttackRelease(freq, "32");
         }
       }
     },
