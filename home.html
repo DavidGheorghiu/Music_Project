@@ -152,6 +152,16 @@
             <div class="volumeGain">
                 <input type="range" min="0"  max="100" value="0" id="volumeValue" onchange="volumeGain(this.value)">
             </div>
+
+            <label>Distortion</label>
+            <div class="Distortion">
+                <input type="range" min="0"  max="10" value="0" id="distortion" onchange="selectedDistortion()">
+            </div>
+
+            <label>Wet</label>
+            <div class="Wet">
+                <input type="range" min="0"  max="10" value="0" id="wet" onchange="selectedWet()">
+            </div>
         </div>
     </div>
 
@@ -252,6 +262,17 @@
             <div class="volumeGainSampler">
                 <input type="range" min="0"  max="100" value="0" id="volumeValueSampler" onchange="volumeGainSampler(this.value)">
             </div>
+
+            <label>Distortion</label>
+            <div class="Distortion">
+                <input type="range" min="0"  max="10" value="0" id="distortionSampler" onchange="selectedDistortionSampler()">
+            </div>
+
+            <label>Wet</label>
+            <div class="Wet">
+                <input type="range" min="0"  max="10" value="0" id="wetSampler" onchange="selectedWetSampler()">
+            </div>
+
         </div>
     </div>
         
