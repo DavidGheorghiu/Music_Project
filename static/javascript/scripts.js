@@ -1,6 +1,6 @@
 function play() {
   oscillatorSequence.start();
-  //sampleSequence.start();
+  sampleSequence.start();
   Tone.Transport.start();
 }
 
@@ -17,11 +17,13 @@ function selectedWave() {
   console.log(val);
   return val;
 }
+
 function selectedFreq() {
   var frequency = document.getElementById("freq").value; //selected value of frequency
   console.log(frequency);
   return frequency;
 }
+
 function volumeGain(value) {
   var vol = (document.getElementById("volume").innerHTML = value);
   // Tone.Transport.volume.value = vol.value;
