@@ -25,13 +25,12 @@ function updateDistortion(distortionSlider) {
   } else {
     samplerDistortion.distortion = distortionValue;
   }
-  console.log(synthDistortion.distortion)
 }
 
 function updatedWet(wetSlider) {
   var wetValue = wetSlider.value/10;
   if(wetSlider.id == 'synth-wet') {
-    synthDistortion.wet = wetValue;
+    synthDistortion.wet.value = wetValue;
   } else {
     samplerDistortion.wet = wetValue;
   }
@@ -85,7 +84,10 @@ for (sequencer of sequencers) {
   var distortionSlider = document.getElementById("synth-distortion").value;
   var wetSlider = document.getElementById("synth-wet").value;
 
-  var synthReverb = new Tone.Freeverb(reverbSlider);
+  var synthReverb = new Tone.Freeverb({
+    dampening: reverbSlider,
+    roomSize: 0.7
+  }).toMaster();
 
   var synthVolume = new Tone.Volume({
     volume: volumeSlider,
@@ -96,6 +98,8 @@ for (sequencer of sequencers) {
     distortion: distortionSlider,
     wet: wetSlider
   }).toMaster();
+
+  synth.fan(synthReverb, synthVolume, synthDistortion);
 
   // Loop through the sequencer and play any sounds that were selected to play
   let cMajor = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
