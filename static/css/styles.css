@@ -1,5 +1,5 @@
 body {
-  background-color: grey;
+  background-color: lightblue;
   }
 
 h1 {
@@ -8,45 +8,73 @@ h1 {
   font-size: 50px;
 }
 
+.container{
+  border: 20px;
+  border-color: blue;
+}
+
 .oss{
   color: white;
-  margin-left: 1300px;
+  margin-left: 1250px;
+  margin-top: 70px;
   font-size:30px;
 }
 
 .samp{
+  color: black;
+  margin-left: 1250px;
+  margin-top: -30px;
+  font-size:30px;
+}
+
+.val{
+  background-color: lightgrey;
   color: white;
-  margin-left: 1300px;
+  padding: 100px;
+}
+
+.freq{
+  color: white;
+  margin-left: 1250px;
+  font-size:30px;
+}
+
+.freq2{
+  color: white;
+  margin-left: 1250px;
   font-size:30px;
 }
 
 .reverb{
   color: white;
-  margin-left: 1300px;
+  margin-left: 1250px;
   font-size:30px;
 }
 
 .reverb2{
   color: white;
-  margin-left: 1300px;
+  margin-left: 1250px;
   font-size:30px;
 }
 
 .volumeGain{
   color: white;
-  margin-left: 1300px;
+  margin-left: 1250px;
+  margin-bottom: 80px;
   font-size:30px;
 }
 
 .volumeGain2{
   color: white;
-  margin-left: 1300px;
+  margin-left: 1250px;
+  margin-top: 30px;
+  margin-bottom: -80px;
   font-size:30px;
 }
 
 .buttons {
   color: white;
-  margin-top: -865px;
+  margin-top: -980px;
   font-size: 20px;
   position: auto;
   border: 1px;
@@ -56,7 +84,7 @@ h1 {
 
 .bpm-slider {
   color: white;
-  margin-top: 10px;
+  margin-top: auto;
   font-size: 22px;
 }
 

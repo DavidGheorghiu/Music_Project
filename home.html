@@ -12,20 +12,22 @@
 
     <body>
 
-    <h1>Basil is a thendi</h1>
+    <h1>Beatz</h1>
 
     <div class="oss" id="filter-oscillator">
       <p><strong>Audio Filters for Oscillator</strong></p>
         <span>Type of Wave</span>
     
         <select id="selectedVal" onclick="selectedWave()">
-        <button value="" selected disabled hidden>Type of wave</button>
-        <option  id="sine" value="sine">Sine</option>
-        <option   id="square" value="square">Square</option>
-        <option id ="triangle" value="triangle">Triangle</option>
-        <option  id="sawtooth" value="sawtooth">Sawtooth</option>
+        <button class="val" value="selected disabled hidden">Type of wave</button>
+        <option class="val" id="sine" value="sine">Sine</option>
+        <option class="val" id="square" value="square">Square</option>
+        <option class="val" id ="triangle" value="triangle">Triangle</option>
+        <option class="val" id="sawtooth" value="sawtooth">Sawtooth</option>
         </select>
+    </div>
       <br>
+      <div class="freq">
       <label>Frequency</label>
       <input onchange="selectedFreq()" id="freq" value=""></input>
       <br>
@@ -51,13 +53,15 @@
           <span>Type of Wave</span>
   
         <select id="selectedVal" onclick="selectedWave()">
-          <button> value="selected disabled hidden>Type of wave</button>
-          <option  id="sine" value="sine">Sine</option>
-          <option   id="square" value="square">Square</option>
-          <option id ="triangle" value="triangle">Triangle</option>
-          <option  id="sawtooth" value="sawtooth">Sawtooth</option>
+          <button class="val" value="selected disabled hidden">Type of wave</button>
+          <option class="val" id="sine" value="sine">Sine</option>
+          <option class="val" id="square" value="square">Square</option>
+          <option class="val" id ="triangle" value="triangle">Triangle</option>
+          <option class="val" id="sawtooth" value="sawtooth">Sawtooth</option>
         </select>
+        </div>
         <br>
+         <div class="freq2">
         <label>Frequency</label>
         <input onchange="selectedFreq()" id="freq" value=""></input>
         <br>
