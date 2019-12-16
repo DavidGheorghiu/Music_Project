@@ -106,7 +106,10 @@ for (sequencer of sequencers) {
       }).toMaster();
       synth.connect(synth2).toMaster();
 
-      var synth3 = new Tone.Volume({ volume: volumeSlider }).toMaster();
+      var synth3 = new Tone.Volume({
+        volume: volumeSlider,
+        mute: false
+      }).toMaster();
       synth.connect(synth3).toMaster();
 
       var synth4 = new Tone.Frequency(freq);
@@ -115,8 +118,6 @@ for (sequencer of sequencers) {
       for (let cell of cells) {
         if (cell.classList.contains("selected")) {
           // Use the cell index to get the correct sound for that cell
-          sampleSound = players._players[cells.indexOf(cell)];
-          sampleSound.start(time, 0, "32n", 0.5);
           synth.triggerAttackRelease(cMajor[columnIndex], "32n");
           //  synth.triggerAttackRelease(freq, "32n");
         }
@@ -143,6 +144,7 @@ for (sequencer of sequencers) {
     ],
     {
       volume: volumeSliderSampler,
+      mute: false,
       fadeOut: "64n"
     }
   ).toMaster();
@@ -180,7 +182,8 @@ for (sequencer of sequencers) {
       synthSampler.connect(synthReverb).toMaster();
 
       var synthVolume = new Tone.Volume({
-        volume: volumeSliderSampler
+        volume: volumeSliderSampler,
+        mute: false
       }).toMaster();
       synthSampler.connect(synthVolume).toMaster();
 
