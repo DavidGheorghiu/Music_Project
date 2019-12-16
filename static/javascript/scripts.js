@@ -1,3 +1,6 @@
+/*                                                                   */
+// TODO: Need to create and initialise function to make code cleaner //
+/*                                                                   */
 let majorScales = {
   'aMajor': ['A4', 'B4', 'C#4', 'D4', 'E4', 'F#4', 'G#4', 'A5'],
   'bMajor': ['B4', 'C#4', 'D#4', 'E4', 'F#4', 'G#4', 'A#4', 'B5'],
@@ -15,6 +18,7 @@ let minorScales = {
 }
 
 var scale = majorScales.aMajor;
+displayNotes(scale);
 
 function play() {
   oscillatorSequence.start();
@@ -35,6 +39,15 @@ function setScale(selectedScale) {
     scale = majorScales[selectedScale.value];
   } else {
     scale = minorScales[selectedScale.value];
+  }
+  displayNotes(scale);
+}
+
+function displayNotes(scale) {
+  var notes = document.getElementById('oscillator-notes').children;
+  notes = Array.from(notes);
+  for(note of notes) {
+    note.innerHTML = scale[notes.indexOf(note)].slice(0, -1);
   }
 }
 

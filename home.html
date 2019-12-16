@@ -29,6 +29,18 @@
             margin: 3px;
         }
 
+        .oscillator-notes {
+            float: left;
+            padding: 10px 1px;
+        }
+
+        .note {
+            height: 30px;
+            width: 30;
+            margin: 6px 3px 0px 3px;
+            text-align: center;
+        }
+
         .selected {
             background-color: red;
         }
@@ -63,7 +75,7 @@
     <div class="container">
         <!--Sequencer-->
             <div id="oscillator-sequencer" class="sequencer">
-                <div class="oscillator-notes">
+                <div class="oscillator-notes" id="oscillator-notes">
                     <div class="note"></div>
                     <div class="note"></div>
                     <div class="note"></div>
