@@ -1,6 +1,6 @@
 function play() {
   oscillatorSequence.start();
-  sampleSequence.start();
+  //  sampleSequence.start();
   Tone.Transport.start();
 }
 
@@ -16,12 +16,6 @@ function selectedWave() {
   var val = document.getElementById("selectedVal").value; //selected value of wave type
   console.log(val);
   return val;
-}
-
-function selectedFreq() {
-  var frequency = document.getElementById("freq").value; //selected value of frequency
-  console.log(frequency);
-  return frequency;
 }
 
 function volumeGain(value) {
@@ -88,12 +82,10 @@ for (sequencer of sequencers) {
       var reverbSlider = document.getElementById("reverbValue").value;
 
       var waveType = selectedWave();
-      var freq = selectedFreq();
+
       console.log(volumeSlider);
       console.log(reverbSlider);
       var synth = new Tone.Synth({
-        frequency: freq,
-
         detune: 0,
         oscillator: {
           type: waveType
@@ -112,14 +104,12 @@ for (sequencer of sequencers) {
       }).toMaster();
       synth.connect(synth3).toMaster();
 
-      var synth4 = new Tone.Frequency(freq);
-      synth.connect(synth4).toMaster();
-
       for (let cell of cells) {
         if (cell.classList.contains("selected")) {
           // Use the cell index to get the correct sound for that cell
-          synth.triggerAttackRelease(cMajor[columnIndex], "32n");
-          //  synth.triggerAttackRelease(freq, "32n");
+          // synth.triggerAttackRelease(cMajor[columnIndex], "32n");
+          synth.frequency.value = freq;
+          synth.triggerAttackRelease(cMajor[cells.indexOf(cell)], "32n");
         }
       }
     },
@@ -166,9 +156,8 @@ for (sequencer of sequencers) {
       console.log("sampler volume " + volumeSliderSampler);
       console.log("reverb sampler value " + reverbSliderSampler);
       var waveTypeSampler = selectedWave();
-      var freqSampler = selectedFreq();
+
       var synthSampler = new Tone.Synth({
-        frequency: freqSampler,
         detune: 0,
         oscillator: {
           type: waveTypeSampler
@@ -186,9 +175,6 @@ for (sequencer of sequencers) {
         mute: false
       }).toMaster();
       synthSampler.connect(synthVolume).toMaster();
-
-      var synthFrequency = new Tone.Frequency(freq);
-      synthSampler.connect(synthFrequency).toMaster();
 
       for (let cell of cells) {
         if (cell.classList.contains("selected")) {
