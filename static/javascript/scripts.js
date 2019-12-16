@@ -1,3 +1,21 @@
+let majorScales = {
+  'aMajor': ['A4', 'B4', 'C#4', 'D4', 'E4', 'F#4', 'G#4', 'A5'],
+  'bMajor': ['B4', 'C#4', 'D#4', 'E4', 'F#4', 'G#4', 'A#4', 'B5'],
+  'cMajor': ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"],
+  'dMajor': ['D4', 'E4', 'F#4', 'G4', 'A5', 'B5', 'C#5', 'D5'],
+  'eMajor': ['E4', 'F#4', 'G#4', 'A4', 'B4', 'C#4', 'D#4', 'E5']
+}
+
+let minorScales = {
+  'aMinor': ['A4', 'B4', 'C4', 'D4', 'E4', 'G4', 'A5'],
+  'bMinor': ['B4', 'C#4', 'D4', 'E4', 'F#4', 'G4', 'A4', 'B5'],
+  'cMinor': ['C4', 'D4', 'Eb4', 'F4', 'G4', 'Ab4', 'Bb4', 'C5'],
+  'dMinor': ['D4', 'E4', 'F4', 'G4', 'A4', 'Bb4', 'C4', 'D5'],
+  'eMinor': ['E4', 'F#4', 'G4', 'A4', 'B4', 'C4', 'D4', 'E5']
+}
+
+var scale = majorScales.aMajor;
+
 function play() {
   oscillatorSequence.start();
   sampleSequence.start();
@@ -10,6 +28,14 @@ function stop() {
 
 function updateBpm(bpmSlider) {
   Tone.Transport.bpm.value = bpmSlider.value;
+}
+
+function setScale(selectedScale) {
+  if(selectedScale.value.includes('Major')) {
+    scale = majorScales[selectedScale.value];
+  } else {
+    scale = minorScales[selectedScale.value];
+  }
 }
 
 ///filter for oscillator
@@ -27,12 +53,12 @@ function updateDistortion(distortionSlider) {
   }
 }
 
-function updatedWet(wetSlider) {
+function updateWet(wetSlider) {
   var wetValue = wetSlider.value/10;
   if(wetSlider.id == 'synth-wet') {
     synthDistortion.wet.value = wetValue;
   } else {
-    samplerDistortion.wet = wetValue;
+    samplerDistortion.wet.value = wetValue;
   }
 }
 
@@ -102,7 +128,6 @@ for (sequencer of sequencers) {
   synth.fan(synthReverb, synthVolume, synthDistortion);
 
   // Loop through the sequencer and play any sounds that were selected to play
-  let cMajor = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
   let columns = document.getElementById("oscillator-sequencer").children;
 
   var oscillatorSequence = new Tone.Sequence(
@@ -114,7 +139,7 @@ for (sequencer of sequencers) {
 
       for (let cell of cells) {
         if (cell.classList.contains("selected")) {
-          synth.triggerAttackRelease(cMajor[cells.indexOf(cell)], "32n");
+          synth.triggerAttackRelease(scale[cells.indexOf(cell)], "32n");
         }
       }
     },
@@ -147,25 +172,25 @@ for (sequencer of sequencers) {
   // Effects
   var volumeSliderSampler = document.getElementById("sampler-volume").value;
   var reverbSliderSampler = document.getElementById("sampler-reverb").value;
-
-  var distortionSliderSampler = document.getElementById("sampler-distortion")
-    .value;
+  var distortionSliderSampler = document.getElementById("sampler-distortion").value;
   var wetSliderSampler = document.getElementById("sampler-wet").value;
 
-  var samplerReverb = new Tone.Freeverb(reverbSliderSampler).toMaster();
-  players.connect(samplerReverb);
+  var samplerReverb = new Tone.Freeverb({
+    dampening: reverbSliderSampler,
+    roomSize: 0.7
+  }).toMaster();
 
   var samplerVolume = new Tone.Volume({
     volume: volumeSliderSampler,
     mute: false
   }).toMaster();
-  players.connect(samplerVolume);
 
-  var distSampler = new Tone.Distortion({
+  var samplerDistortion = new Tone.Distortion({
     distortion: distortionSliderSampler,
     wet: wetSliderSampler
   }).toMaster();
-  synth.connect(distSampler);
+  
+  players.fan(samplerReverb, samplerVolume, samplerDistortion);
 
   // Loop through the sequencer and play any sounds that were selected to play
   let columns = document.getElementById("sample-sequencer").children;

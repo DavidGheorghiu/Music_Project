@@ -48,9 +48,31 @@
         <br>
         <input type="range" min="60" max="200" value="60" class="slider" onchange="updateBpm(this)">
     </div>
+    <select onclick="setScale(this)">
+        <option value="aMajor">A Major</option>
+        <option value="bMajor">B Major</option>
+        <option value="cMajor">C Major</option>
+        <option value="dMajor">D Major</option>
+        <option value="eMajor">E Major</option>
+        <option value="aMinor">A Minor</option>
+        <option value="bMinor">B Minor</option>
+        <option value="cMinor">C Minor</option>
+        <option value="dMinor">D Minor</option>
+        <option value="eMinor">E Minor</option>
+    </select>
     <div class="container">
         <!--Sequencer-->
             <div id="oscillator-sequencer" class="sequencer">
+                <div class="oscillator-notes">
+                    <div class="note"></div>
+                    <div class="note"></div>
+                    <div class="note"></div>
+                    <div class="note"></div>
+                    <div class="note"></div>
+                    <div class="note"></div>
+                    <div class="note"></div>
+                    <div class="note"></div>
+                </div>
                 <div class="column">
                     <div class="cell"></div>
                     <div class="cell"></div>
@@ -136,10 +158,9 @@
         <!--Audio Manipulation-->
         <div class="filter">
             <p><strong style="font-size:larger;">Audio Filters for Oscillator</strong></p>
-                <span>Type of Wave</span>
-                </span>
-        
-                <select id="selectedVal" onclick="selectedWave()">
+            
+            <span>Type of Wave</span>
+            <select id="selectedVal" onclick="selectedWave()">
                 <button value="" selected disabled hidden>Type of wave</option>
                 <option  value="sine">Sine</option>
                 <option   value="square">Square</option>
@@ -166,7 +187,7 @@
 
             <label>Wet</label>
             <div class="Wet">
-                <input type="range" min="0"  max="10" value="0" id="synth-wet" onchange="updatedWet(this)">
+                <input type="range" min="0"  max="10" value="0" id="synth-wet" onchange="updateWet(this)">
             </div>
         </div>
     </div>
