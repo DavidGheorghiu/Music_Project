@@ -1,18 +1,18 @@
 let majorScales = {
-  'aMajor': ['A4', 'B4', 'C#4', 'D4', 'E4', 'F#4', 'G#4', 'A5'],
-  'bMajor': ['B4', 'C#4', 'D#4', 'E4', 'F#4', 'G#4', 'A#4', 'B5'],
-  'cMajor': ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"],
-  'dMajor': ['D4', 'E4', 'F#4', 'G4', 'A5', 'B5', 'C#5', 'D5'],
-  'eMajor': ['E4', 'F#4', 'G#4', 'A4', 'B4', 'C#4', 'D#4', 'E5']
-}
+  aMajor: ["A4", "B4", "C#4", "D4", "E4", "F#4", "G#4", "A5"],
+  bMajor: ["B4", "C#4", "D#4", "E4", "F#4", "G#4", "A#4", "B5"],
+  cMajor: ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"],
+  dMajor: ["D4", "E4", "F#4", "G4", "A5", "B5", "C#5", "D5"],
+  eMajor: ["E4", "F#4", "G#4", "A4", "B4", "C#4", "D#4", "E5"]
+};
 
 let minorScales = {
-  'aMinor': ['A4', 'B4', 'C4', 'D4', 'E4', 'G4', 'A5'],
-  'bMinor': ['B4', 'C#4', 'D4', 'E4', 'F#4', 'G4', 'A4', 'B5'],
-  'cMinor': ['C4', 'D4', 'Eb4', 'F4', 'G4', 'Ab4', 'Bb4', 'C5'],
-  'dMinor': ['D4', 'E4', 'F4', 'G4', 'A4', 'Bb4', 'C4', 'D5'],
-  'eMinor': ['E4', 'F#4', 'G4', 'A4', 'B4', 'C4', 'D4', 'E5']
-}
+  aMinor: ["A4", "B4", "C4", "D4", "E4", "G4", "A5"],
+  bMinor: ["B4", "C#4", "D4", "E4", "F#4", "G4", "A4", "B5"],
+  cMinor: ["C4", "D4", "Eb4", "F4", "G4", "Ab4", "Bb4", "C5"],
+  dMinor: ["D4", "E4", "F4", "G4", "A4", "Bb4", "C4", "D5"],
+  eMinor: ["E4", "F#4", "G4", "A4", "B4", "C4", "D4", "E5"]
+};
 
 var scale = majorScales.aMajor;
 
@@ -31,7 +31,7 @@ function updateBpm(bpmSlider) {
 }
 
 function setScale(selectedScale) {
-  if(selectedScale.value.includes('Major')) {
+  if (selectedScale.value.includes("Major")) {
     scale = majorScales[selectedScale.value];
   } else {
     scale = minorScales[selectedScale.value];
@@ -45,8 +45,8 @@ function selectedWave() {
 }
 
 function updateDistortion(distortionSlider) {
-  var distortionValue = distortionSlider.value/10;
-  if(distortionSlider.id == 'synth-distortion') {
+  var distortionValue = distortionSlider.value / 10;
+  if (distortionSlider.id == "synth-distortion") {
     synthDistortion.distortion = distortionValue;
   } else {
     samplerDistortion.distortion = distortionValue;
@@ -54,8 +54,8 @@ function updateDistortion(distortionSlider) {
 }
 
 function updateWet(wetSlider) {
-  var wetValue = wetSlider.value/10;
-  if(wetSlider.id == 'synth-wet') {
+  var wetValue = wetSlider.value / 10;
+  if (wetSlider.id == "synth-wet") {
     synthDistortion.wet.value = wetValue;
   } else {
     samplerDistortion.wet.value = wetValue;
@@ -64,7 +64,7 @@ function updateWet(wetSlider) {
 
 function updateVolume(volumeSlider) {
   var volumeValue = volumeSlider.value;
-  if(volumeSlider.id == 'synth-volume') {
+  if (volumeSlider.id == "synth-volume") {
     synthVolume.volume.value = volumeValue;
   } else {
     samplerVolume.volume.value = volumeValue;
@@ -73,13 +73,30 @@ function updateVolume(volumeSlider) {
 
 function updateReverb(reverbSlider) {
   var reverbValue = reverbSlider.value;
-  if(reverbSlider.id == 'synth-reverb') {
+  if (reverbSlider.id == "synth-reverb") {
     synthReverb.dampening.value = reverbValue;
   } else {
     samplerReverb.dampening.value = reverbValue;
   }
 }
-
+/*
+function updateCheby(chebySlider) {
+  var chebyValue = chebySlider.value;
+  if (chebySlider.id == "synth-cheby") {
+    synthCheby.order.value = chebyValue;
+  } else {
+    chebySampler.order.value = chebyValue;
+  }
+}
+*/
+function updateBitCrusher(bitSlider) {
+  var bitValue = bitSlider.value;
+  if (bitSlider.id == "synth-bitcrusher") {
+    synthBitcrusher.bits.value = bitValue;
+  } else {
+    bitSampler.bits.value = bitValue;
+  }
+}
 var sequencers = document.querySelectorAll(".sequencer");
 for (sequencer of sequencers) {
   sequencer.addEventListener("click", function(event) {
@@ -109,11 +126,15 @@ for (sequencer of sequencers) {
   var reverbSlider = document.getElementById("synth-reverb").value;
   var distortionSlider = document.getElementById("synth-distortion").value;
   var wetSlider = document.getElementById("synth-wet").value;
+  var chebySlider = document.getElementById("synth-wet").value;
+  var bitSlider = document.getElementById("synth-bitcrusher").value;
 
   var synthReverb = new Tone.Freeverb({
     dampening: reverbSlider,
     roomSize: 0.7
   }).toMaster();
+
+  var synthBitcrusher = new Tone.BitCrusher({ bits: bitSlider }).toMaster();
 
   var synthVolume = new Tone.Volume({
     volume: volumeSlider,
@@ -125,7 +146,13 @@ for (sequencer of sequencers) {
     wet: wetSlider
   }).toMaster();
 
-  synth.fan(synthReverb, synthVolume, synthDistortion);
+  synth.fan(
+    synthReverb,
+    synthVolume,
+    synthDistortion,
+    // synthCheby,
+    synthBitcrusher
+  );
 
   // Loop through the sequencer and play any sounds that were selected to play
   let columns = document.getElementById("oscillator-sequencer").children;
@@ -172,12 +199,20 @@ for (sequencer of sequencers) {
   // Effects
   var volumeSliderSampler = document.getElementById("sampler-volume").value;
   var reverbSliderSampler = document.getElementById("sampler-reverb").value;
-  var distortionSliderSampler = document.getElementById("sampler-distortion").value;
+  var distortionSliderSampler = document.getElementById("sampler-distortion")
+    .value;
   var wetSliderSampler = document.getElementById("sampler-wet").value;
+  var wetSlider = document.getElementById("sampler-wet").value;
+  var chebySlider = document.getElementById("sampler-wet").value;
+  var bitSlider = document.getElementById("sampler-bitcrusher").value;
 
   var samplerReverb = new Tone.Freeverb({
     dampening: reverbSliderSampler,
     roomSize: 0.7
+  }).toMaster();
+
+  var bitSampler = new Tone.BitCrusher({
+    bits: bitSlider
   }).toMaster();
 
   var samplerVolume = new Tone.Volume({
@@ -189,8 +224,14 @@ for (sequencer of sequencers) {
     distortion: distortionSliderSampler,
     wet: wetSliderSampler
   }).toMaster();
-  
-  players.fan(samplerReverb, samplerVolume, samplerDistortion);
+
+  players.fan(
+    samplerReverb,
+    samplerVolume,
+    samplerDistortion,
+    //  chebySampler,
+    bitSampler
+  );
 
   // Loop through the sequencer and play any sounds that were selected to play
   let columns = document.getElementById("sample-sequencer").children;
