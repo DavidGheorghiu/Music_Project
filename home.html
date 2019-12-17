@@ -184,22 +184,22 @@
 
             <label>Reverb</label>
             <div class="reverb">
-                <input type="range" min="0" max="10000" value="0"  id="synth-reverb" onchange="updateReverb(this)">
+                <input type="range" min="0" max="10000" value="0"  id="synth-reverb" onchange="setSliderValue(this)">
             </div>
         
             <label>Volume</label>
             <div class="volumeGain">
-                <input type="range" min="0"  max="100" value="0" id="synth-volume" onchange="updateVolume(this)">
+                <input type="range" min="0"  max="100" value="0" id="synth-volume" onchange="setSliderValue(this)">
             </div>
 
             <label>Distortion</label>
             <div class="Distortion">
-                <input type="range" min="0"  max="10" value="0" id="synth-distortion" onchange="updateDistortion(this)">
+                <input type="range" min="0"  max="10" value="0" id="synth-distortion" onchange="setSliderValue(this)">
             </div>
 
             <label>Wet</label>
             <div class="Wet">
-                <input type="range" min="0"  max="10" value="0" id="synth-wet" onchange="updateWet(this)">
+                <input type="range" min="0"  max="10" value="0" id="synth-wet" onchange="setSliderValue(this)">
             </div>
         </div>
     </div>
@@ -294,22 +294,22 @@
             <p><strong style="font-size:larger;">Audio Filters for Sampler</strong></p>
             <label>Reverb</label>
             <div class="reverbSamper">
-                <input type="range" min="0" max="10000" value="0"  id="sampler-reverb" onchange="updateReverb(this)">
+                <input type="range" min="0" max="10000" value="0"  id="sampler-reverb" onchange="setSliderValue(this)">
             </div>
         
             <label>Volume</label>
             <div class="volumeGainSampler">
-                <input type="range" min="0"  max="100" value="0" id="sampler-volume" onchange="updateVolume(this)">
+                <input type="range" min="0"  max="100" value="0" id="sampler-volume" onchange="setSliderValue(this)">
             </div>
 
             <label>Distortion</label>
             <div class="Distortion">
-                <input type="range" min="0"  max="10" value="0" id="sampler-distortion" onchange="updateDistortion(this)">
+                <input type="range" min="0"  max="10" value="0" id="sampler-distortion" onchange="setSliderValue(this)">
             </div>
 
             <label>Wet</label>
             <div class="Wet">
-                <input type="range" min="0"  max="10" value="0" id="sampler-wet" onchange="updateWet(this)">
+                <input type="range" min="0"  max="10" value="0" id="sampler-wet" onchange="setSliderValue(this)">
             </div>
 
         </div>

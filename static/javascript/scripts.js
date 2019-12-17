@@ -1,5 +1,5 @@
 /*                                                                   */
-// TODO: Need to create and initialise function to make code cleaner //
+/* TODO: Need to create and initialise function to make code cleaner */
 /*                                                                   */
 let majorScales = {
   'aMajor': ['A4', 'B4', 'C#4', 'D4', 'E4', 'F#4', 'G#4', 'A5'],
@@ -19,6 +19,8 @@ let minorScales = {
 
 var scale = majorScales.aMajor;
 displayNotes(scale);
+//hardcoded for now
+Tone.Transport.bpm.value = 60;
 
 function play() {
   oscillatorSequence.start();
@@ -90,6 +92,31 @@ function updateReverb(reverbSlider) {
     synthReverb.dampening.value = reverbValue;
   } else {
     samplerReverb.dampening.value = reverbValue;
+  }
+}
+
+function setSliderValue(slider) {
+  var newValue = slider.value;
+  // Update synth values
+  if(slider.id.includes('synth')) {
+    switch(slider.id) {
+      case 'synth-reverb': synthReverb.dampening.value = newValue; break;
+      case 'synth-volume': synthVolume.volume.value = newValue; break;
+      case 'synth-distortion': synthDistortion.distortion = newValue/10; break;
+      case 'synth-wet': synthDistortion.wet.value = newValue/10; break;
+      case 'default': break;
+    }
+  // Update sampler values
+  } else if(slider.id.includes('sampler')) {
+      switch(slider.id) {
+        case 'sampler-reverb': samplerReverb.dampening.value = newValue; break;
+        case 'sampler-volume': samplerVolume.volume.value = newValue; break;
+        case 'sampler-distortion': samplerDistortion.distortion = newValue/10; break;
+        case 'sampler-wet': samplerDistortion.wet.value = newValue/10; break;
+      }
+  } else {
+    // Updated BPM
+    Tone.Transport.bpm.value = newValue;
   }
 }
 
