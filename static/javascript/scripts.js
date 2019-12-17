@@ -59,42 +59,6 @@ function selectedWave() {
   synth.oscillator.type = waveType;
 }
 
-function updateDistortion(distortionSlider) {
-  var distortionValue = distortionSlider.value / 10;
-  if (distortionSlider.id == "synth-distortion") {
-    synthDistortion.distortion = distortionValue;
-  } else {
-    samplerDistortion.distortion = distortionValue;
-  }
-}
-
-function updateWet(wetSlider) {
-  var wetValue = wetSlider.value / 10;
-  if (wetSlider.id == "synth-wet") {
-    synthDistortion.wet.value = wetValue;
-  } else {
-    samplerDistortion.wet.value = wetValue;
-  }
-}
-
-function updateVolume(volumeSlider) {
-  var volumeValue = volumeSlider.value;
-  if (volumeSlider.id == "synth-volume") {
-    synthVolume.volume.value = volumeValue;
-  } else {
-    samplerVolume.volume.value = volumeValue;
-  }
-}
-
-function updateReverb(reverbSlider) {
-  var reverbValue = reverbSlider.value;
-  if (reverbSlider.id == "synth-reverb") {
-    synthReverb.dampening.value = reverbValue;
-  } else {
-    samplerReverb.dampening.value = reverbValue;
-  }
-}
-
 function setSliderValue(slider) {
   var newValue = slider.value;
   // Update synth values
@@ -115,7 +79,7 @@ function setSliderValue(slider) {
         case 'sampler-wet': samplerDistortion.wet.value = newValue/10; break;
       }
   } else {
-    // Updated BPM
+    // Update BPM
     Tone.Transport.bpm.value = newValue;
   }
 }
