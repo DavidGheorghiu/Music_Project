@@ -45,21 +45,13 @@ h1 {
   border: 3px solid rgb(99, 64, 13);
 }
 
-<<<<<<< HEAD
-.oscillator-notes {
+.oscillator-notes,
+.sample-beats {
   float: left;
   padding: 5px 1px;
-  vertical-align: baseline;
   text-align: center;
   display: block;
-=======
-.oscillator-notes, .sample-beats {
-	float: left;
-	padding: 5px 1px;
-	text-align: center;
-  display: block;
   width: 50px;
->>>>>>> d4a545e4108244a8923d8bde3d834c67ed9f17c1
 }
 
 .note {
