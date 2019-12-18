@@ -1,67 +1,30 @@
-
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Sequencer</title>
-    <link rel = "stylesheet" type = "text/css" href = "./static/css/styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
-    <style>
-        .container {
-            width: 50%;
-            height: 160px;
-            padding-bottom: 150px;
-            margin: 0 auto;
-        }
-        .sequencer {
-            border: 1px solid black; 
-            
-        }
 
-        .column {
-            float: left;
-            padding: 10px 1px;
-        }
+    <head>
 
-        .cell {
-            border: 1px solid black;
-            height: 30px;
-            width: 51px;
-            border-radius: 6px;
-            margin: 3px;
-        }
+        <title>Sequencer</title>
+        <link rel = "stylesheet" type = "text/css" href = "./static/css/styles.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
 
-        .oscillator-notes {
-            float: left;
-            padding: 10px 1px;
-        }
-
-        .note {
-            height: 30px;
-            width: 30;
-            margin: 6px 3px 0px 3px;
-            text-align: center;
-        }
-
-        .selected {
-            background-color: red;
-        }
-
-        .filter {
-            float: right;
-        }
-        </style>     
   </head>
   <body>
-      
-    <button onclick="play()">Play</button>
-    <button id="stop-button" onclick="stop()">Stop</button>
+
+  	<h1>Beatz!</h1>
+
+	<div class="btn-group">
+		<button class="buttons" onclick="play()">Play</button>
+		<button class="buttons" id="stop-button" onclick="stop()">Stop</button>
+	</div>
 
     <div class="bpm-slider">
         <label>BPM</label>
         <br>
         <input type="range" min="60" max="200" value="60" class="slider" onchange="updateBpm(this)">
     </div>
-    <select onclick="setScale(this)">
+
+    <select class="scale" onclick="setScale(this)">
         <option value="aMajor">A Major</option>
         <option value="bMajor">B Major</option>
         <option value="cMajor">C Major</option>
@@ -73,6 +36,7 @@
         <option value="dMinor">D Minor</option>
         <option value="eMinor">E Minor</option>
     </select>
+
     <div class="container">
         <!--Sequencer-->
             <div id="oscillator-sequencer" class="sequencer">
@@ -170,15 +134,15 @@
 
         <!--Audio Manipulation-->
         <div class="filter">
-            <p><strong style="font-size:larger;">Audio Filters for Oscillator</strong></p>
+            <p><strong>Audio Filters for Oscillator</strong></p>
             
             <span>Type of Wave</span>
-            <select id="selectedVal" onclick="selectedWave()">
-                <button value="" selected disabled hidden>Type of wave</option>
-                <option  value="sine">Sine</option>
-                <option   value="square">Square</option>
+            <select class="wave" id="selectedVal" onclick="selectedWave()">
+                <button value="" selected disabled hidden>Type of wave</button>
+                <option value="sine">Sine</option>
+                <option value="square">Square</option>
                 <option value="triangle">Triangle</option>
-                <option   value="sawtooth">Sawtooth</option>
+                <option value="sawtooth">Sawtooth</option>
             </select>
             
             <br>
@@ -202,10 +166,12 @@
             <div class="Wet">
                 <input type="range" min="0"  max="10" value="0" id="synth-wet" onchange="setSliderValue(this)">
             </div>
+
             <label>Cheby</label>
             <div class="Cheby">
                 <input type="range" min="0"  max="10" value="0" id="synth-cheby" onchange="updateCheby(this)">
             </div>
+
             <label>Bit</label>
             <div class="Bit">
                 <input type="range" min="0"  max="20" value="0" id="synth-bitcrusher" onchange="updateBitCrusher(this)">
@@ -213,7 +179,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container2">
         <!--Sequencer-->
         <div id="sample-sequencer" class="sequencer">
             <div class="column">
@@ -300,7 +266,7 @@
 
         <!--Audio Manipulation-->
         <div class="filter">
-            <p><strong style="font-size:larger;">Audio Filters for Sampler</strong></p>
+            <p><strong>Audio Filters for Sampler</strong></p>
             <label>Reverb</label>
             <div class="reverbSamper">
                 <input type="range" min="0" max="10000" value="0"  id="sampler-reverb" onchange="setSliderValue(this)">
