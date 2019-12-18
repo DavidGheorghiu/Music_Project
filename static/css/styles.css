@@ -56,39 +56,39 @@ h1 {
     background-color: darkgrey;
 }
 
-.btn-group .buttons {
-	border: 3px solid black;
-	width: 50%;
+.buttons {
+  float: left;
+  border: 3px solid black;
 	padding: 16px 32px;
-	margin: auto;
 	text-align: center;
-	display: inline-block;
 	font-size: 24px;
 	background-color: white;
 	color: black;
 	transition-duration: 0.4s;
-	cursor: pointer;
-	float: left
+  cursor: pointer;
+  width: 50%;
 }
 
-.btn-group .buttons:hover {
-	background-color: lightgrey;
+.top-container {
+  height: 65px;
+  width: 100%;
+}
+
+.buttons:hover {
+  background-color: lightgrey;
 }
 
 .bpm-slider {
 	color: black;
   text-align: center;
-  display: inline-block;
+  float: right;
   width: 50%;
 	font-size: 30px;
 	font:open-sens;
 }
 
 .slider{
-  color: black;
-  margin: 10px;
-  width: 93%;
-  position: center;
+  float: right;
 }
 
 .filter {
@@ -100,18 +100,69 @@ h1 {
 .select-box {
   font-size: 16px;
   padding-left: 10px;
-  width: absolute;
-  height: absolute;
-  margin: absolute;
   text-align: center;
   display: inline-block;
 }
 
+select {
+  float: right;
+  border: 1px solid black;
+  background-color: white;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+select:hover {
+  background-color: lightgrey;
+}
+
 .slider-container{
-  width: auto;
   position: center;
 }
 
-.float-right {
-  float: right;
+.filter-title {
+  text-align: center;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-ms-track {
+  cursor: pointer;
+  background: transparent; 
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: inherit;
+  height: 1px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px black, 0px 0px 1px black;
+}
+
+input[type=range]:hover::-webkit-slider-thumb {
+  background-color: white;
+  border: 2px solid black;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  transition-duration: 0.4s;
+  height: 20px;
+  margin-top: -8px;
+  width: 20px;
+  background-color: black;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-appearance: none;
 }
