@@ -137,56 +137,7 @@ h1 {
   display: inline-block;
 }
 
-.reverb{
-  color: white;
-  margin: auto;
-  width: auto;
-  position: center;
-}
-
-.volumeGain{
-  color: white;
-  margin: auto;
-  width: auto;
-  position: center;
-}
-
-.Distortion{
-  color: white;
-  margin: auto;
-  width: auto;
-  position: center;
-}
-
-.Wet{
-  color: white;
-  margin: auto;
-  width: auto;
-  position: center;
-}
-
-.Cheby{
-  color: white;
-  margin: auto;
-  width: auto;
-  position: center;
-}
-
-.Bit{
-  color: white;
-  margin: auto;
-  width: auto;
-  position: center;
-}
-
-.reverbSamper{
-  color: white;
-  margin: auto;
-  width: auto;
-  position: center;
-}
-
-.volumeGainSampler{
+.slider{
   color: white;
   margin: auto;
   width: auto;
