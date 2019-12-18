@@ -20,40 +20,33 @@ h1 {
 .column {
     float: left;
     padding: 3px;
+    padding-left: 10px
 }
 
-.container .cell {
+.cell {
     border: 1px solid black;
     height: 40px;
     width: 120px;
     border-radius: 5px;
-    padding: 5px;
-    margin: 3px;
-}
-
-.container2 .cell {
-    border: 1px solid black;
-    height: 40px;
-    width: 120px;
-    border-radius: 5px;
-    padding-bottom: 10px;
-    margin: 3px;
+    margin: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .oscillator-notes {
 	float: left;
-	padding: 10px 1px;
+	padding: 5px 1px;
 	vertical-align: baseline;
 	text-align: center;
 	display: block;
-  	float: both;
 }
 
 .note {
-	height: 58px;
+	height: 50px;
 	width: auto;
 	margin: auto;
-  	vertical-align: baseline;
+  	padding-left: 50px;
 	text-align: center;
 	display: block;
   	float: both;
@@ -113,6 +106,7 @@ h1 {
   margin: right;
   display: inline-block;
   font-size: 24px;
+  text-align: right;
   padding-left: 3px;
 }
 
@@ -166,16 +160,6 @@ h1 {
   margin: auto;
   width: auto;
   position: center;
-}
-
-.filter2{
-  height: auto;
-  width: auto;
-  position: right;
-  margin: right;
-  display: inline-block;
-  font-size: 24px;
-  padding-left: 3px;
 }
 
 .reverbSamper{
