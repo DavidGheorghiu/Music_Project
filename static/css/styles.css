@@ -103,11 +103,24 @@ h1 {
   height: auto;
   width: auto;
   position: right;
-  margin: right;
+  margin: 10px;
+  margin-left: 10px;
   display: inline-block;
   font-size: 24px;
   text-align: right;
   padding-left: 3px;
+}
+
+.filter2 {
+  height: auto;
+  width: auto;
+  position: absolute;
+  margin: 20px;
+  margin-left: 100px;
+  display: inline-block;
+  font-size: 24px;
+  text-align: right;
+  padding-right: 80px;
 }
 
 .wave {
