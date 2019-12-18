@@ -23,15 +23,15 @@ displayNotes(scale);
 Tone.Transport.bpm.value = 60;
 
 function toggleSound() {
-  var toggleBtn = document.getElementById('toggle-sound-btn');
-  if(Tone.Transport.state == 'stopped') {
+  var toggleBtn = document.getElementById("toggle-sound-btn");
+  if (Tone.Transport.state == "stopped") {
     oscillatorSequence.start();
     sampleSequence.start();
     Tone.Transport.start();
-    toggleBtn.innerHTML = 'Stop';
+    toggleBtn.innerHTML = '<i style="font-size:24px" class="fa">&#xf04d;</i>';
   } else {
     Tone.Transport.stop();
-    toggleBtn.innerHTML = 'Play';
+    toggleBtn.innerHTML = '<i style="font-size:24px" class="fa">&#xf04b;</i>';
   }
 }
 
@@ -40,7 +40,7 @@ function updateBpm(bpmSlider) {
 }
 
 function setScale() {
-  var selectedScale = document.getElementById('selectedScale');
+  var selectedScale = document.getElementById("selectedScale");
   if (selectedScale.value.includes("Major")) {
     scale = majorScales[selectedScale.value];
   } else {
@@ -50,9 +50,9 @@ function setScale() {
 }
 
 function displayNotes(scale) {
-  var notes = document.getElementById('oscillator-notes').children;
+  var notes = document.getElementById("oscillator-notes").children;
   notes = Array.from(notes);
-  for(note of notes) {
+  for (note of notes) {
     note.innerHTML = scale[notes.indexOf(note)].slice(0, -1);
   }
 }
@@ -66,23 +66,41 @@ function selectedWave() {
 function setSliderValue(slider) {
   var newValue = slider.value;
   // Update synth values
-  if(slider.id.includes('synth')) {
-    switch(slider.id) {
-      case 'synth-reverb': synthReverb.dampening.value = newValue; break;
-      case 'synth-volume': synthVolume.volume.value = newValue; break;
-      case 'synth-distortion': synthDistortion.distortion = newValue/10; break;
-      case 'synth-wet': synthDistortion.wet.value = newValue/10; break;
-      case 'default': break; // Do nothing if we don't have the slider
+  if (slider.id.includes("synth")) {
+    switch (slider.id) {
+      case "synth-reverb":
+        synthReverb.dampening.value = newValue;
+        break;
+      case "synth-volume":
+        synthVolume.volume.value = newValue;
+        break;
+      case "synth-distortion":
+        synthDistortion.distortion = newValue / 10;
+        break;
+      case "synth-wet":
+        synthDistortion.wet.value = newValue / 10;
+        break;
+      case "default":
+        break; // Do nothing if we don't have the slider
     }
-  // Update sampler values
-  } else if(slider.id.includes('sampler')) {
-      switch(slider.id) {
-        case 'sampler-reverb': samplerReverb.dampening.value = newValue; break;
-        case 'sampler-volume': samplerVolume.volume.value = newValue; break;
-        case 'sampler-distortion': samplerDistortion.distortion = newValue/10; break;
-        case 'sampler-wet': samplerDistortion.wet.value = newValue/10; break;
-        case 'default': break; // Do nothing if we don't have the slider
-      }
+    // Update sampler values
+  } else if (slider.id.includes("sampler")) {
+    switch (slider.id) {
+      case "sampler-reverb":
+        samplerReverb.dampening.value = newValue;
+        break;
+      case "sampler-volume":
+        samplerVolume.volume.value = newValue;
+        break;
+      case "sampler-distortion":
+        samplerDistortion.distortion = newValue / 10;
+        break;
+      case "sampler-wet":
+        samplerDistortion.wet.value = newValue / 10;
+        break;
+      case "default":
+        break; // Do nothing if we don't have the slider
+    }
   } else {
     // Update BPM
     Tone.Transport.bpm.value = newValue;
@@ -134,11 +152,7 @@ for (sequencer of sequencers) {
     wet: wetSlider
   }).toMaster();
 
-  synth.fan(
-    synthReverb,
-    synthVolume,
-    synthDistortion
-  );
+  synth.fan(synthReverb, synthVolume, synthDistortion);
 
   // Loop through the sequencer and play any sounds that were selected to play
   let columns = document.getElementById("oscillator-sequencer").children;
@@ -205,11 +219,7 @@ for (sequencer of sequencers) {
     wet: wetSliderSampler
   }).toMaster();
 
-  players.fan(
-    samplerReverb,
-    samplerVolume,
-    samplerDistortion
-  );
+  players.fan(samplerReverb, samplerVolume, samplerDistortion);
 
   // Loop through the sequencer and play any sounds that were selected to play
   let columns = document.getElementById("sample-sequencer").children;
