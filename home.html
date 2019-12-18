@@ -14,8 +14,7 @@
   	<h1>Beatz!</h1>
 
 	<div class="btn-group">
-		<button class="buttons" onclick="play()">Play</button>
-		<button class="buttons" id="stop-button" onclick="stop()">Stop</button>
+		<button class="buttons" onclick="toggleSound()">Play</button>
 	</div>
 
     <div class="bpm-slider">
@@ -124,7 +123,7 @@
             <p><strong>Audio Filters for Oscillator</strong></p>
             
             <span>Wave-type:</span>
-            <select class="selected-box" id="selectedVal" onclick="selectedWave()">
+            <select class="selected-box float-right" id="selectedVal" onclick="selectedWave()">
                 <button value="" selected disabled hidden>Type of wave</button>
                 <option value="sine">Sine</option>
                 <option value="square">Square</option>
@@ -133,7 +132,7 @@
             </select>
             <br>
             <span>Scale:</span>
-            <select class="selected-box" id="selectedScale" onclick="setScale()">
+            <select class="selected-box float-right" id="selectedScale" onclick="setScale()">
                 <option value="aMajor">A Major</option>
                 <option value="bMajor">B Major</option>
                 <option value="cMajor">C Major</option>
@@ -150,22 +149,22 @@
 
             <div class="slider-container">
                 <span>Reverb:</span>
-                <input type="range" min="0" max="10000" value="0"  id="synth-reverb" onchange="setSliderValue(this)">
+                <input class="float-right" type="range" min="0" max="10000" value="0"  id="synth-reverb" onchange="setSliderValue(this)">
             </div>
         
             <div class="slider-container">
                 <span>Volume gain:</span>
-                <input type="range" min="0"  max="100" value="0" id="synth-volume" onchange="setSliderValue(this)">
+                <input class="float-right" type="range" min="0"  max="100" value="0" id="synth-volume" onchange="setSliderValue(this)">
             </div>
 
             <div class="slider-container">
                 <span>Distortion:</span>
-                <input type="range" min="0"  max="10" value="0" id="synth-distortion" onchange="setSliderValue(this)">
+                <input class="float-right" type="range" min="0"  max="10" value="0" id="synth-distortion" onchange="setSliderValue(this)">
             </div>
 
             <div class="slider-container">
                 <span>Wet:</span>
-                <input type="range" min="0"  max="10" value="0" id="synth-wet" onchange="setSliderValue(this)">
+                <input class="float-right" type="range" min="0"  max="10" value="0" id="synth-wet" onchange="setSliderValue(this)">
             </div>
         </div>
     </div>
@@ -260,22 +259,22 @@
             <p><strong>Audio Filters for Sampler</strong></p>
             <div class="slider-container">
                 <span>Reverb:</label>
-                <input type="range" min="0" max="10000" value="0"  id="sampler-reverb" onchange="setSliderValue(this)">
+                <input class="float-right" type="range" min="0" max="10000" value="0"  id="sampler-reverb" onchange="setSliderValue(this)">
             </div>
         
             <div class="slider-container">
                 <span>Volume-gain:</span>
-                <input type="range" min="0"  max="100" value="0" id="sampler-volume" onchange="setSliderValue(this)">
+                <input class="float-right" type="range" min="0"  max="100" value="0" id="sampler-volume" onchange="setSliderValue(this)">
             </div>
 
             <div class="slider-container">
                 <span>Distortion:</span>
-                <input type="range" min="0"  max="10" value="0" id="sampler-distortion" onchange="setSliderValue(this)">
+                <input class="float-right" type="range" min="0"  max="10" value="0" id="sampler-distortion" onchange="setSliderValue(this)">
             </div>
 
             <div class="slider-container">
                 <label>Wet:</span>
-                <input type="range" min="0"  max="10" value="0" id="sampler-wet" onchange="setSliderValue(this)">
+                <input class="float-right" type="range" min="0"  max="10" value="0" id="sampler-wet" onchange="setSliderValue(this)">
             </div>
         </div>
     </div>

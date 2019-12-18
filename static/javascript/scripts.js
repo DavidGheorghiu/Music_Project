@@ -22,14 +22,14 @@ displayNotes(scale);
 //hardcoded for now
 Tone.Transport.bpm.value = 60;
 
-function play() {
-  oscillatorSequence.start();
-  sampleSequence.start();
-  Tone.Transport.start();
-}
-
-function stop() {
-  Tone.Transport.stop();
+function toggleSound() {
+  if(Tone.Transport.state == 'stopped') {
+    oscillatorSequence.start();
+    sampleSequence.start();
+    Tone.Transport.start();
+  } else {
+    Tone.Transport.stop();
+  }
 }
 
 function updateBpm(bpmSlider) {
