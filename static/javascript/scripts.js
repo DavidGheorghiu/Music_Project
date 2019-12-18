@@ -68,7 +68,7 @@ function setSliderValue(slider) {
       case 'synth-volume': synthVolume.volume.value = newValue; break;
       case 'synth-distortion': synthDistortion.distortion = newValue/10; break;
       case 'synth-wet': synthDistortion.wet.value = newValue/10; break;
-      case 'default': break;
+      case 'default': break; // Do nothing if we don't have the slider
     }
   // Update sampler values
   } else if(slider.id.includes('sampler')) {
@@ -77,6 +77,7 @@ function setSliderValue(slider) {
         case 'sampler-volume': samplerVolume.volume.value = newValue; break;
         case 'sampler-distortion': samplerDistortion.distortion = newValue/10; break;
         case 'sampler-wet': samplerDistortion.wet.value = newValue/10; break;
+        case 'default': break; // Do nothing if we don't have the slider
       }
   } else {
     // Update BPM
@@ -84,24 +85,6 @@ function setSliderValue(slider) {
   }
 }
 
-/*
-function updateCheby(chebySlider) {
-  var chebyValue = chebySlider.value;
-  if (chebySlider.id == "synth-cheby") {
-    synthCheby.order.value = chebyValue;
-  } else {
-    chebySampler.order.value = chebyValue;
-  }
-}
-*/
-function updateBitCrusher(bitSlider) {
-  var bitValue = bitSlider.value;
-  if (bitSlider.id == "synth-bitcrusher") {
-    synthBitcrusher.bits.value = bitValue;
-  } else {
-    bitSampler.bits.value = bitValue;
-  }
-}
 var sequencers = document.querySelectorAll(".sequencer");
 for (sequencer of sequencers) {
   sequencer.addEventListener("click", function(event) {
@@ -131,15 +114,11 @@ for (sequencer of sequencers) {
   var reverbSlider = document.getElementById("synth-reverb").value;
   var distortionSlider = document.getElementById("synth-distortion").value;
   var wetSlider = document.getElementById("synth-wet").value;
-  var chebySlider = document.getElementById("synth-wet").value;
-  var bitSlider = document.getElementById("synth-bitcrusher").value;
 
   var synthReverb = new Tone.Freeverb({
     dampening: reverbSlider,
     roomSize: 0.7
   }).toMaster();
-
-  var synthBitcrusher = new Tone.BitCrusher({ bits: bitSlider }).toMaster();
 
   var synthVolume = new Tone.Volume({
     volume: volumeSlider,
@@ -154,9 +133,7 @@ for (sequencer of sequencers) {
   synth.fan(
     synthReverb,
     synthVolume,
-    synthDistortion,
-    // synthCheby,
-    synthBitcrusher
+    synthDistortion
   );
 
   // Loop through the sequencer and play any sounds that were selected to play
@@ -208,16 +185,10 @@ for (sequencer of sequencers) {
     .value;
   var wetSliderSampler = document.getElementById("sampler-wet").value;
   var wetSlider = document.getElementById("sampler-wet").value;
-  var chebySlider = document.getElementById("sampler-wet").value;
-  var bitSlider = document.getElementById("sampler-bitcrusher").value;
 
   var samplerReverb = new Tone.Freeverb({
     dampening: reverbSliderSampler,
     roomSize: 0.7
-  }).toMaster();
-
-  var bitSampler = new Tone.BitCrusher({
-    bits: bitSlider
   }).toMaster();
 
   var samplerVolume = new Tone.Volume({
@@ -233,9 +204,7 @@ for (sequencer of sequencers) {
   players.fan(
     samplerReverb,
     samplerVolume,
-    samplerDistortion,
-    //  chebySampler,
-    bitSampler
+    samplerDistortion
   );
 
   // Loop through the sequencer and play any sounds that were selected to play
