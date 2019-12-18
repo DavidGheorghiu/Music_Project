@@ -92,7 +92,7 @@ h1 {
 }
 
 .slider{
-  color: white;
+  color: black;
   margin: 10px;
   width: 93%;
   position: center;
@@ -114,9 +114,8 @@ h1 {
   display: inline-block;
 }
 
-.slider{
-  color: white;
-  margin: auto;
+.slider-container{
   width: auto;
   position: center;
 }
+
