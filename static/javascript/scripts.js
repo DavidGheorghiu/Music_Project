@@ -36,7 +36,8 @@ function updateBpm(bpmSlider) {
   Tone.Transport.bpm.value = bpmSlider.value;
 }
 
-function setScale(selectedScale) {
+function setScale() {
+  var selectedScale = document.getElementById('selectedScale');
   if (selectedScale.value.includes("Major")) {
     scale = majorScales[selectedScale.value];
   } else {

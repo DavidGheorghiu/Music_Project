@@ -24,19 +24,6 @@
         <input type="range" min="60" max="200" value="60" class="slider" onchange="updateBpm(this)">
     </div>
 
-    <select class="scale" onclick="setScale(this)">
-        <option value="aMajor">A Major</option>
-        <option value="bMajor">B Major</option>
-        <option value="cMajor">C Major</option>
-        <option value="dMajor">D Major</option>
-        <option value="eMajor">E Major</option>
-        <option value="aMinor">A Minor</option>
-        <option value="bMinor">B Minor</option>
-        <option value="cMinor">C Minor</option>
-        <option value="dMinor">D Minor</option>
-        <option value="eMinor">E Minor</option>
-    </select>
-
     <div class="container">
         <!--Sequencer-->
             <div id="oscillator-sequencer" class="sequencer">
@@ -136,13 +123,27 @@
         <div class="filter">
             <p><strong>Audio Filters for Oscillator</strong></p>
             
-            <span>Type of Wave</span>
-            <select class="wave" id="selectedVal" onclick="selectedWave()">
+            <span>Wave-type:</span>
+            <select class="selected-box" id="selectedVal" onclick="selectedWave()">
                 <button value="" selected disabled hidden>Type of wave</button>
                 <option value="sine">Sine</option>
                 <option value="square">Square</option>
                 <option value="triangle">Triangle</option>
                 <option value="sawtooth">Sawtooth</option>
+            </select>
+            <br>
+            <span>Scale:</span>
+            <select class="selected-box" id="selectedScale" onclick="setScale()">
+                <option value="aMajor">A Major</option>
+                <option value="bMajor">B Major</option>
+                <option value="cMajor">C Major</option>
+                <option value="dMajor">D Major</option>
+                <option value="eMajor">E Major</option>
+                <option value="aMinor">A Minor</option>
+                <option value="bMinor">B Minor</option>
+                <option value="cMinor">C Minor</option>
+                <option value="dMinor">D Minor</option>
+                <option value="eMinor">E Minor</option>
             </select>
             
             <br>
@@ -153,7 +154,7 @@
             </div>
         
             <div class="slider-container">
-                <span>Volume:</span>
+                <span>Volume gain:</span>
                 <input type="range" min="0"  max="100" value="0" id="synth-volume" onchange="setSliderValue(this)">
             </div>
 
@@ -257,23 +258,23 @@
         <!--Audio Manipulation-->
         <div class="filter">
             <p><strong>Audio Filters for Sampler</strong></p>
-            <label>Reverb</label>
             <div class="slider-container">
+                <span>Reverb:</label>
                 <input type="range" min="0" max="10000" value="0"  id="sampler-reverb" onchange="setSliderValue(this)">
             </div>
         
-            <label>Volume</label>
             <div class="slider-container">
+                <span>Volume-gain:</span>
                 <input type="range" min="0"  max="100" value="0" id="sampler-volume" onchange="setSliderValue(this)">
             </div>
 
-            <label>Distortion</label>
             <div class="slider-container">
+                <span>Distortion:</span>
                 <input type="range" min="0"  max="10" value="0" id="sampler-distortion" onchange="setSliderValue(this)">
             </div>
 
-            <label>Wet</label>
             <div class="slider-container">
+                <label>Wet:</span>
                 <input type="range" min="0"  max="10" value="0" id="sampler-wet" onchange="setSliderValue(this)">
             </div>
         </div>
