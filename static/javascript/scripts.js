@@ -23,12 +23,15 @@ displayNotes(scale);
 Tone.Transport.bpm.value = 60;
 
 function toggleSound() {
+  var toggleBtn = document.getElementById('toggle-sound-btn');
   if(Tone.Transport.state == 'stopped') {
     oscillatorSequence.start();
     sampleSequence.start();
     Tone.Transport.start();
+    toggleBtn.innerHTML = 'Stop';
   } else {
     Tone.Transport.stop();
+    toggleBtn.innerHTML = 'Play';
   }
 }
 

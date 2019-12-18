@@ -14,12 +14,11 @@
   	<h1>Beatz!</h1>
 
 	<div class="btn-group">
-		<button class="buttons" onclick="toggleSound()">Play</button>
-	</div>
+		<button class="buttons" id="toggle-sound-btn" onclick="toggleSound()">Play</button>
+    </div>
 
     <div class="bpm-slider">
-        <label>BPM</label>
-        <br>
+        <span>BPM</span>
         <input type="range" min="60" max="200" value="60" class="slider" onchange="updateBpm(this)">
     </div>
 
