@@ -1,3 +1,7 @@
+body {
+  min-width: 1820px;
+}
+
 h1 {
   color: black;
   text-align: center;
