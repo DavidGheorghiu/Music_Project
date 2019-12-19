@@ -17,6 +17,16 @@ let minorScales = {
   eMinor: ["E4", "F#4", "G4", "A4", "B4", "C4", "D4", "E5"]
 };
 
+var samplesDirectories = [
+  './static/Samples/909 Drum Machine/909YCLAP/Clap',
+  './static/Samples/909 Drum Machine/909YCRASHS/Crash',
+  './static/Samples/909 Drum Machine/909YHHTS/Hi-Hat',
+  './static/Samples/909 Drum Machine/909YKICK/Kick',
+  './static/Samples/909 Drum Machine/909YRIDE/Ride',
+  './static/Samples/909 Drum Machine/909YRIM/Rim',
+  './static/Samples/909 Drum Machine/909YSNARES/Snare',
+  './static/Samples/909 Drum Machine/909YTOMS/Tom'
+];
 var scale = majorScales.aMajor;
 displayNotes(scale);
 //hardcoded for now
@@ -161,19 +171,56 @@ for (sequencer of sequencers) {
   );
 }
 
+var playerIndices = {
+    clap: '1', crash: '1', hihat: '1', kick: '1',
+    ride: '1', rim: '1', snare: '1', tom: '1'
+};
+var sampleNames = [
+  'clap', 'crash', 'hihat', 'kick',
+  'ride', 'rim', 'snare', 'tom'
+]
+function setSample(selectedSample) {
+  var newPlayers = [];
+  playerIndices[selectedSample.id] = selectedSample.value;
+
+  players.dispose();
+
+  for(var i = 0; i < 8; i++) {
+    newPlayers[i] = samplesDirectories[i] + playerIndices[sampleNames[i]] + '.wav';
+    players = createPlayer(newPlayers);
+  }
+  console.log(newPlayers)
+}
+
+function createPlayer(newPlayers) {
+  player = new Tone.Players(
+    [
+      newPlayers[0], newPlayers[1], newPlayers[2], newPlayers[3],
+      newPlayers[4], newPlayers[5], newPlayers[6], newPlayers[7]
+    ],
+    {
+      // volume: volumeSliderSampler,
+      mute: false,
+      fadeOut: "64n"
+    }
+  ).toMaster();
+
+  return player;
+}
+
 // Sample Sequencer
 {
-  // Store the .wav files in a Tone player to be used in the Sequence
-  var players = new Tone.Players(
+   // Store the .wav files in a Tone player to be used in the Sequence
+   var players = new Tone.Players(
     [
-      "./static/Samples/909 Drum Machine/909YCLAP/909Y38SN11.wav",
-      "./static/Samples/909 Drum Machine/909YCRASHS/909Y49CS11.wav",
-      "./static/Samples/909 Drum Machine/909YHHTS/909Y42CHH1.wav",
-      "./static/Samples/909 Drum Machine/909YKICK/909Y33BD31.wav",
-      "./static/Samples/909 Drum Machine/909YRIDE/909Y51RD11.wav",
-      "./static/Samples/909 Drum Machine/909YRIM/909Y37RIM1.wav",
-      "./static/Samples/909 Drum Machine/909YSNARES/909Y38SN11.wav",
-      "./static/Samples/909 Drum Machine/909YTOMS/909Y41FTL1.wav"
+      "./static/Samples/909 Drum Machine/909YCLAP/Clap1.wav",
+      "./static/Samples/909 Drum Machine/909YCRASHS/Crash1.wav",
+      "./static/Samples/909 Drum Machine/909YHHTS/Hi-Hat1.wav",
+      "./static/Samples/909 Drum Machine/909YKICK/Kick1.wav",
+      "./static/Samples/909 Drum Machine/909YRIDE/Ride1.wav",
+      "./static/Samples/909 Drum Machine/909YRIM/Rim1.wav",
+      "./static/Samples/909 Drum Machine/909YSNARES/Snare1.wav",
+      "./static/Samples/909 Drum Machine/909YTOMS/Tom1.wav"
     ],
     {
       // volume: volumeSliderSampler,
