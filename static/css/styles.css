@@ -27,8 +27,8 @@ body {
 
 .column {
   float: left;
-  padding: 3px;
-  padding-left: 10px;
+  padding: 3px 3px 3px 10px;
+  width: 130px;
 }
 
 .cell {
@@ -104,6 +104,7 @@ body {
 .slider {
   margin-top: 14px;
   float: right;
+  width: 110px;
 }
 
 .filter {
