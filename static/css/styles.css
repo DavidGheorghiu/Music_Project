@@ -25,8 +25,8 @@ h1 {
 
 .column {
   float: left;
-  padding: 3px;
-  padding-left: 10px;
+  padding: 3px 3px 3px 10px;
+  width: 130px;
 }
 
 .cell {
