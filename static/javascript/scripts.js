@@ -67,6 +67,12 @@ function displayNotes(scale) {
   }
 }
 
+function stopSound() {
+  var toggleBtn = document.getElementById("toggle-sound-btn");
+  Tone.Transport.stop();
+  toggleBtn.innerHTML = '<i style="font-size:24px" class="fa">&#xf04b;</i>';
+}
+
 ///filter for oscillator
 function selectedWave() {
   var waveType = document.getElementById("selectedVal").value; //selected value of wave type
@@ -203,7 +209,7 @@ function setSample(selectedSample) {
     newPlayers[i] = samplesDirectories[i] + playerIndices[sampleNames[i]] + '.wav';
     players = createPlayer(newPlayers);
   }
-  console.log(newPlayers)
+  stopSound();
 }
 
 function createPlayer(newPlayers) {

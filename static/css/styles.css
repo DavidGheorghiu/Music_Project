@@ -102,6 +102,7 @@ h1 {
 .slider {
   margin-top: 14px;
   float: right;
+  width: 110px;
 }
 
 .filter {
