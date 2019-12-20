@@ -2,15 +2,6 @@ body {
   min-width: 1820px;
 }
 
-/*h1 {
-  color: rgb(189, 171, 112);
-  text-align: center;
-  text-shadow: 5px 3px black;
-  text-decoration: bold;
-  font-size: 50px;
-  font: open-sens;
-}*/
-
 .container {
   border: 10px;
   border-color: black;
