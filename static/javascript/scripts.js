@@ -296,5 +296,29 @@ function createPlayer(newPlayers) {
   );
 }
 
+function resetSequencer(sequencerToReset) {
+
+  // Check which sequencer we want to change
+  if(sequencerToReset == 'synth') {
+    var columns = document.getElementById('oscillator-sequencer').children;
+  } else {
+    var columns = document.getElementById('sample-sequencer').children;
+  }
+
+  // Convert htmlcollection to an array so we can slice of the first column (which displays the notes/sample beats)
+  columns = Array.from(columns).slice(0);
+
+  // Reset the board by removing the selected class from the sequencer cell
+  for(var column of columns) {
+    var cells = Array.from(column.children);
+    for(var cell of cells) {
+      console.log(cell)
+      if(cell.classList.contains('selected')) {
+        cell.classList.remove('selected');
+      }
+    }
+  }
+}
+
 
 // Added this comment so we can say we have 300 lines of code :) //
