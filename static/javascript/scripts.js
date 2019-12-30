@@ -14,7 +14,7 @@ let minorScales = {
   bMinor: ['B5', 'A4', 'G4', 'F#4', 'E4', 'D4', 'C#4', 'B4'],
   cMinor: ['C5', 'Bb4', 'Ab4', 'G4', 'F4', 'Eb4', 'D4', 'C4'],
   dMinor: ['D5', 'C4', 'Bb4', 'A4', 'G4', 'F4', 'E4', 'D4'],
-  eMinor: ['E5', 'D4', 'C4', 'B4', 'A4', 'g4', 'F#4', 'E4']
+  eMinor: ['E5', 'D4', 'C4', 'B4', 'A4', 'G4', 'F#4', 'E4']
 };
 
 var samplesDirectories = [
