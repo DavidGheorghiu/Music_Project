@@ -2,19 +2,19 @@
 /* TODO: Need to create and initialise function to make code cleaner */
 /*                                                                   */
 let majorScales = {
-  aMajor: ["A4", "B4", "C#4", "D4", "E4", "F#4", "G#4", "A5"],
-  bMajor: ["B4", "C#4", "D#4", "E4", "F#4", "G#4", "A#4", "B5"],
-  cMajor: ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"],
-  dMajor: ["D4", "E4", "F#4", "G4", "A5", "B5", "C#5", "D5"],
-  eMajor: ["E4", "F#4", "G#4", "A4", "B4", "C#4", "D#4", "E5"]
+  aMajor: ['A5', 'G#4', 'F#4', 'E4', 'D4', 'C#4', 'B4', 'A4'],
+  bMajor: ['B5', 'A#4', 'G#4', 'F#4', 'E4', 'D#4', 'C#4', 'B4'],
+  cMajor: ['C5', 'B4', 'A4', 'G4', 'F4', 'E4', 'D4', 'C4'],
+  dMajor: ['D5', 'C#5', 'B5', 'A5', 'G4', 'F#4', 'E4', 'D4'],
+  eMajor: ['E5', 'D#4', 'C#4', 'B4', 'A4', 'G#4', 'F#4', 'E4']
 };
 
 let minorScales = {
-  aMinor: ["A4", "B4", "C4", "D4", "E4", "G4", "A5"],
-  bMinor: ["B4", "C#4", "D4", "E4", "F#4", "G4", "A4", "B5"],
-  cMinor: ["C4", "D4", "Eb4", "F4", "G4", "Ab4", "Bb4", "C5"],
-  dMinor: ["D4", "E4", "F4", "G4", "A4", "Bb4", "C4", "D5"],
-  eMinor: ["E4", "F#4", "G4", "A4", "B4", "C4", "D4", "E5"]
+  aMinor: ['A5', 'B5', 'C5', 'D5', 'E5', 'F5', 'G5', 'A4'],
+  bMinor: ['B5', 'A4', 'G4', 'F#4', 'E4', 'D4', 'C#4', 'B4'],
+  cMinor: ['C5', 'Bb4', 'Ab4', 'G4', 'F4', 'Eb4', 'D4', 'C4'],
+  dMinor: ['D5', 'C4', 'Bb4', 'A4', 'G4', 'F4', 'E4', 'D4'],
+  eMinor: ['E5', 'D4', 'C4', 'B4', 'A4', 'g4', 'F#4', 'E4']
 };
 
 var samplesDirectories = [
