@@ -1,6 +1,4 @@
-/*                                                                   */
-/* TODO: Need to create and initialise function to make code cleaner */
-/*                                                                   */
+// Musical Scales
 let majorScales = {
   aMajor: ['A5', 'G#4', 'F#4', 'E4', 'D4', 'C#4', 'B4', 'A4'],
   bMajor: ['B5', 'A#4', 'G#4', 'F#4', 'E4', 'D#4', 'C#4', 'B4'],
@@ -17,6 +15,7 @@ let minorScales = {
   eMinor: ['E5', 'D4', 'C4', 'B4', 'A4', 'G4', 'F#4', 'E4']
 };
 
+// Directory paths for the .wav files
 var samplesDirectories = [
   './static/Samples/909 Drum Machine/909YCLAP/Clap',
   './static/Samples/909 Drum Machine/909YCRASHS/Crash',
@@ -27,10 +26,14 @@ var samplesDirectories = [
   './static/Samples/909 Drum Machine/909YSNARES/Snare',
   './static/Samples/909 Drum Machine/909YTOMS/Tom'
 ];
-var scale = majorScales.aMajor;
+
+// Set the default scale to the default value in the select box and display it
+var scale = [];
+setScale();
 displayNotes(scale);
-//hardcoded for now
-Tone.Transport.bpm.value = 60;
+
+// Set the default bpm value to that of the initial value of the bpm slider
+Tone.Transport.bpm.value = document.getElementById('bpm-slider').value;
 
 function toggleSound() {
   var toggleBtn = document.getElementById("toggle-sound-btn");
@@ -147,7 +150,7 @@ for (sequencer of sequencers) {
     }
   });
 
-  // Effects
+  // Effects sliders with initial values
   var volumeSlider = document.getElementById("synth-volume").value;
   var reverbSlider = document.getElementById("synth-reverb").value;
   var distortionSlider = document.getElementById("synth-distortion").value;
@@ -191,6 +194,8 @@ for (sequencer of sequencers) {
   );
 }
 
+// Two arraws storing the initial playerIndices and another storing the player effects
+// Need these to keep track of which one to manipulate or change
 var playerIndices = {
     clap: '1', crash: '1', hihat: '1', kick: '1',
     ride: '1', rim: '1', snare: '1', tom: '1'
@@ -199,6 +204,7 @@ var sampleNames = [
   'clap', 'crash', 'hihat', 'kick',
   'ride', 'rim', 'snare', 'tom'
 ]
+
 function setSample(selectedSample) {
   var newPlayers = [];
   playerIndices[selectedSample.id] = selectedSample.value;
@@ -249,11 +255,10 @@ function createPlayer(newPlayers) {
     }
   ).toMaster();
 
-  // Effects
+  // Effects sliders / select boxes with initial values
   var volumeSliderSampler = document.getElementById("sampler-volume").value;
   var reverbSliderSampler = document.getElementById("sampler-reverb").value;
-  var distortionSliderSampler = document.getElementById("sampler-distortion")
-    .value;
+  var distortionSliderSampler = document.getElementById("sampler-distortion").value;
   var wetSliderSampler = document.getElementById("sampler-wet").value;
   var wetSlider = document.getElementById("sampler-wet").value;
 
@@ -319,6 +324,3 @@ function resetSequencer(sequencerToReset) {
     }
   }
 }
-
-
-// Added this comment so we can say we have 300 lines of code :) //
