@@ -74,7 +74,7 @@
     "karma-safari-launcher": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^3.0.5",
-    "mocha": "^5.1.1",
+    "mocha": "^10.1.0",
     "proxy-polyfill": "^0.2.0",
     "semver": "^5.5.0",
     "teoria": "^2.5.0",
